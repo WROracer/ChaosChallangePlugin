@@ -2,6 +2,7 @@ package de.wroracer.chaoschallange.chaos;
 
 import de.wroracer.chaoschallange.ChaosChallange;
 import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.vote.counter.TwitchVoteCounter;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -30,6 +31,8 @@ public class ChaosManager implements Listener {
     private Objective board;
     private BossBar bossBar;
 
+    private TwitchVoteCounter twitchVoteCounter;
+
     public boolean isActivated;
 
     private final String randomName = "Random event";
@@ -54,6 +57,8 @@ public class ChaosManager implements Listener {
     public ChaosManager(ChaosChallange plugin){
         this.plugin = plugin;
         actions = new ArrayList<>();
+
+        twitchVoteCounter = new TwitchVoteCounter(this);
 
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         board = scoreboard.registerNewObjective("board","dummy","§6Vote-Board");
@@ -111,6 +116,7 @@ public class ChaosManager implements Listener {
         }catch (Exception ignored){
 
         }
+        twitchVoteCounter.disconect();
         board.getScore("Waiting").setScore(1);
     }
 
@@ -163,6 +169,7 @@ public class ChaosManager implements Listener {
             board.getScore(action3.getName()).setScore(8);
             board.getScore(randomName).setScore(9);
         }
+        twitchVoteCounter.hasVoted.clear();
         if (isActivated) {
             timeBosBar = voteTime;
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::endVoting,voteTime*20);
@@ -183,16 +190,16 @@ public class ChaosManager implements Listener {
         switch (nbr){
             case 1:
             case 6:
-                vote1++; break;
+                vote1++;System.out.println("Register vote 1"); break;
             case 2:
             case 7:
-                vote2++;break;
+                vote2++;System.out.println("Register vote 2");break;
             case 3:
             case 8:
-                vote3++;break;
+                vote3++;System.out.println("Register vote 3");break;
             case 4:
             case 9:
-                vote4++;break;
+                vote4++;System.out.println("Register vote 4");break;
         }
     }
 
