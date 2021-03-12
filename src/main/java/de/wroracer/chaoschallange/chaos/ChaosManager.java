@@ -2,6 +2,7 @@ package de.wroracer.chaoschallange.chaos;
 
 import de.wroracer.chaoschallange.ChaosChallange;
 import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.config.MainConfig;
 import de.wroracer.chaoschallange.vote.counter.TwitchVoteCounter;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
@@ -58,7 +59,7 @@ public class ChaosManager implements Listener {
         this.plugin = plugin;
         actions = new ArrayList<>();
 
-        twitchVoteCounter = new TwitchVoteCounter(this);
+        twitchVoteCounter = new TwitchVoteCounter(this,new MainConfig());
 
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         board = scoreboard.registerNewObjective("board","dummy","§6Vote-Board");
