@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import de.wroracer.chaoschallange.config.MainConfig;
 
 public class TwitchVoteCounter {
 
@@ -28,13 +29,14 @@ public class TwitchVoteCounter {
     public List<String> hasVoted;
     private List<String> channels;
 
-    public TwitchVoteCounter( ChaosManager manager) {
+    public TwitchVoteCounter( ChaosManager manager,MainConfig config) {
         this.manager = manager;
         channels = new ArrayList<>();
-        channels.add("wroracer");
+        channels.add(config.getChannel());
+        channelName = config.getChannel();
 
         hasVoted = new ArrayList<>();
-        OAuth2Credential credential = new OAuth2Credential("twitch", "04dutdwbvpusuf1478s4puql3y1zqv");
+        OAuth2Credential credential = new OAuth2Credential("twitch", config.getChannel());
         client = TwitchClientBuilder.builder()
             .withEnableChat(true).withChatAccount(credential).build();
         client.getEventManager().onEvent(ChannelMessageEvent.class, new Consumer<ChannelMessageEvent>() {
