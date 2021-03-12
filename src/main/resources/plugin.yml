@@ -1,0 +1,9 @@
+name: ChaosChallange
+version: ${project.version}
+main: de.wroracer.chaoschallange.ChaosChallange
+api-version: 1.16
+commands:
+  vote:
+    description: Vote für ein Event
+  start:
+    description: Starte das Ganze
