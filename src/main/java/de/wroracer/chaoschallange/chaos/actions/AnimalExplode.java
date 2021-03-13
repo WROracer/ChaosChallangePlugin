@@ -24,10 +24,13 @@ public class AnimalExplode extends Action{
                     //do stuff here
                 }
                 else{
+                    if (entity.getType() != EntityType.DROPPED_ITEM || entity.getType() != EntityType.PLAYER){
+
             Location pos = entity.getLocation();
             pos.getWorld().createExplosion(pos, 10);
             //pos.getWorld().spawnEntity(pos, EntityType.PRIMED_TNT);
 
+                    }
                 }
             }
         }
