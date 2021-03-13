@@ -22,11 +22,15 @@ public class AnimalExplode extends Action{
                 if(entity instanceof Player) {
                     Player nearPlayer = (Player) entity;
                     //do stuff here
-                } else{
-                  Location pos = entity.getLocation();
-                  pos.getWorld().createExplosion(pos, 10);
-                  //pos.getWorld().spawnEntity(pos, EntityType.PRIMED_TNT);
+                }
+                else{
+                    if (entity.getType() != EntityType.DROPPED_ITEM || entity.getType() != EntityType.PLAYER){
 
+            Location pos = entity.getLocation();
+            pos.getWorld().createExplosion(pos, 10);
+            //pos.getWorld().spawnEntity(pos, EntityType.PRIMED_TNT);
+
+                    }
                 }
             }
         }
