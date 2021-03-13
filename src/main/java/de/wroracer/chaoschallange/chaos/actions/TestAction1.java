@@ -10,7 +10,6 @@ public class TestAction1 extends Action{
 
     @Override
     public void start() {
-
         Bukkit.broadcastMessage("TEST 1");
     }
 

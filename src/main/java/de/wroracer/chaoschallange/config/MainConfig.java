@@ -25,6 +25,7 @@ public class MainConfig {
             try {
                cfg.set("Twitch.Channel","Twitch LiveStream Kannal");
                 cfg.set("Twitch.OAuth2","Twitch Username OAuth2");
+                cfg.set("Chaos.Voting.Time",60);
 
                 cfg.save(file);
             } catch (IOException ignored) {
@@ -36,5 +37,8 @@ public class MainConfig {
     }
     public String getOAuth2(){
         return cfg.getString("Twitch.OAuth2");
+    }
+    public int getVotingTime(){
+        return cfg.getInt("Chaos.Voting.Time");
     }
 }

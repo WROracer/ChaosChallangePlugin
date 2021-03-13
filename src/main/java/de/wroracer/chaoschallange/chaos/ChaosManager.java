@@ -53,13 +53,16 @@ public class ChaosManager implements Listener {
 
     private int voteTime;
 
+    private MainConfig conf;
+
 
 
     public ChaosManager(ChaosChallange plugin){
         this.plugin = plugin;
         actions = new ArrayList<>();
+        conf = new MainConfig();
 
-        twitchVoteCounter = new TwitchVoteCounter(this,new MainConfig());
+        twitchVoteCounter = new TwitchVoteCounter(this,conf);
 
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         board = scoreboard.registerNewObjective("board","dummy","§6Vote-Board");
@@ -78,7 +81,7 @@ public class ChaosManager implements Listener {
             bossBar.addPlayer(player);
         });
 
-        voteTime = 7;
+        voteTime = conf.getVotingTime();
 
         isActivated = false;
 
