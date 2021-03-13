@@ -19,7 +19,9 @@ public abstract class Action {
         new TestAction1("TEST1",manager);
         new TestAction2("TEST2",manager);
         new TestAction3("TEST3",manager);
-        new TestAction4("TEST4",manager);
+        //new TestAction4("TEST4",manager);
+        new AnimalExplode("AnimalsEcplodes",manager);
+        //new Test("TEST",manager);
     }
 
 

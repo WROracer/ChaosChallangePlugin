@@ -78,7 +78,7 @@ public class ChaosManager implements Listener {
             bossBar.addPlayer(player);
         });
 
-        voteTime = 60;
+        voteTime = 7;
 
         isActivated = false;
 

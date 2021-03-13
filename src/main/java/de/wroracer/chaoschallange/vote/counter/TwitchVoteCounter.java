@@ -12,7 +12,7 @@ import com.github.twitch4j.common.util.EventManagerUtils;
 import de.wroracer.chaoschallange.chaos.ChaosManager;
 import org.bukkit.Bukkit;
 
-import javax.xml.bind.Marshaller;
+//import javax.xml.bind.Marshaller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -36,7 +36,7 @@ public class TwitchVoteCounter {
         channelName = config.getChannel();
 
         hasVoted = new ArrayList<>();
-        OAuth2Credential credential = new OAuth2Credential("twitch", config.getChannel());
+        OAuth2Credential credential = new OAuth2Credential("twitch", config.getOAuth2());
         client = TwitchClientBuilder.builder()
             .withEnableChat(true).withChatAccount(credential).build();
         client.getEventManager().onEvent(ChannelMessageEvent.class, new Consumer<ChannelMessageEvent>() {
