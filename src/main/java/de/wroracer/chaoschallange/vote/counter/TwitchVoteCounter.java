@@ -14,6 +14,7 @@ import org.bukkit.Bukkit;
 
 //import javax.xml.bind.Marshaller;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
@@ -32,7 +33,12 @@ public class TwitchVoteCounter {
     public TwitchVoteCounter( ChaosManager manager,MainConfig config) {
         this.manager = manager;
         channels = new ArrayList<>();
-        channels.add(config.getChannel());
+        String channelTemp = config.getChannel();
+        System.out.println(channelTemp);
+        for (String temp:channelTemp.split("::")) {
+            System.out.println(temp);
+            channels.add(temp);
+        }
         channelName = config.getChannel();
 
         hasVoted = new ArrayList<>();
@@ -46,28 +52,32 @@ public class TwitchVoteCounter {
                 String user = event.getUser().getName();
                 String message = event.getMessage();
                 if (channels.contains(channel)){
-                    if (!hasVoted.contains(user)){
-                        try {
-                            int nbr = Integer.parseInt(message);
-                            if (nbr >=1 && nbr!=5 && nbr <=9){
-                                manager.vote(nbr);
-                                hasVoted.add(user);
-                            }
-                        }catch (Exception ignored){Bukkit.broadcastMessage("§7[§5Twitch-Chat§7] <§f"+user+"§7> §d"+message);}
-                    }else {
-                        Bukkit.broadcastMessage("§7[§5Twitch-Chat§7] <§f"+user+"§7> §d"+message);
-                    }
+                    try {
+                        int nbr = Integer.parseInt(message);
+                          if (nbr >=1 && nbr!=5 && nbr <=9){
+                                if (!hasVoted.contains(user)) {
+                                    manager.vote(nbr);
+                                    hasVoted.add(user);
+                                }
+                          }else {
+                              Bukkit.broadcastMessage("§7[§5Twitch-"+channel+"§7] <§f"+user+"§7> §d"+message);
+                          }
+                        }catch (Exception ignored){Bukkit.broadcastMessage("§7[§5Twitch-"+channel+"§7] <§f"+user+"§7> §d"+message);}
                 }
             }
         });
-        client.getChat().sendMessage(channelName,"Chaos Online");
-        client.getChat().joinChannel(channelName);
+        channels.forEach(channel->{
+            System.out.println("Connecting To Twitch Channel: "+channel);
+            client.getChat().sendMessage(channel,"Chaos Online");
+            client.getChat().joinChannel(channel);
+        });
     }
     public void disconect(){
-        client.getChat().disconnect();
+        channels.forEach(channel->{
+            client.getChat().leaveChannel(channel);
+        });
         client.getChat().leaveChannel(channelName);
-        client.getChat().close();
-        client.close();
+        client.getChat().disconnect();
     }
 
 

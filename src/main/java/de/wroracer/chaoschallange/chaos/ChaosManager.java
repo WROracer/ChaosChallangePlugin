@@ -5,6 +5,7 @@ import de.wroracer.chaoschallange.chaos.actions.Action;
 import de.wroracer.chaoschallange.config.MainConfig;
 import de.wroracer.chaoschallange.vote.counter.TwitchVoteCounter;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -46,6 +47,10 @@ public class ChaosManager implements Listener {
 
     private Action lastAction;
 
+    public List<Action> getActions() {
+        return actions;
+    }
+
     private int vote1;
     private int vote2;
     private int vote3;
@@ -55,7 +60,9 @@ public class ChaosManager implements Listener {
 
     private MainConfig conf;
 
-
+    public ChaosChallange getPlugin() {
+        return plugin;
+    }
 
     public ChaosManager(ChaosChallange plugin){
         this.plugin = plugin;
@@ -120,7 +127,6 @@ public class ChaosManager implements Listener {
         }catch (Exception ignored){
 
         }
-        twitchVoteCounter.disconect();
         board.getScore("Waiting").setScore(1);
     }
 
@@ -134,6 +140,11 @@ public class ChaosManager implements Listener {
 
 
     private boolean useOneTwoThree;
+
+    public int getVoteTime() {
+        return voteTime;
+    }
+
     private void startVoting(){
         try {
             scoreboard.resetScores(action1.getName());
@@ -187,6 +198,7 @@ public class ChaosManager implements Listener {
     }
 
     public void stop(){
+        twitchVoteCounter.disconect();
         bossBar.removeAll();
     }
 
@@ -226,6 +238,7 @@ public class ChaosManager implements Listener {
         }
         lastAction = toSelect.get(rnd.nextInt(toSelect.size()));
         lastAction.start();
+        Bukkit.broadcastMessage("§2Event: §6"+lastAction.getName());
         actions.add(action1);
         actions.add(action2);
         actions.add(action3);

@@ -3,6 +3,7 @@ package de.wroracer.chaoschallange;
 import de.wroracer.chaoschallange.chaos.ChaosManager;
 import de.wroracer.chaoschallange.chaos.actions.Action;
 import de.wroracer.chaoschallange.commands.StartCommand;
+import de.wroracer.chaoschallange.commands.TestActionCommand;
 import de.wroracer.chaoschallange.commands.VoteCommand;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -24,7 +25,6 @@ public final class ChaosChallange extends JavaPlugin {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(manager,this);
 
-
     }
 
     @Override
@@ -36,5 +36,8 @@ public final class ChaosChallange extends JavaPlugin {
     private void initCommands(){
         getCommand("vote").setExecutor(new VoteCommand(manager));
         getCommand("start").setExecutor(new StartCommand(manager));
+        TestActionCommand testActionCommand = new TestActionCommand(manager);
+        getCommand("test").setExecutor(testActionCommand);
+        getCommand("test").setTabCompleter(testActionCommand);
     }
 }

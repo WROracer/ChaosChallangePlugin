@@ -7,3 +7,5 @@ commands:
     description: Vote für ein Event
   start:
     description: Starte das Ganze
+  test:
+    description: Teste Vershieden Aktionen aus

@@ -5,23 +5,29 @@ import de.wroracer.chaoschallange.chaos.ChaosManager;
 public abstract class Action {
 
     private String name;
+    private ChaosManager manager;
     public Action(String name, ChaosManager manager){
         this.name = name;
+        this.manager = manager;
         manager.addAction(this);
     }
 
     public String getName(){return name;}
 
+    public ChaosManager getManager(){return manager;}
+
     public abstract void start();
     public abstract void stop();
 
     public static void registerActions(ChaosManager manager){
-        new TestAction1("TEST1",manager);
-        new TestAction2("TEST2",manager);
-        new TestAction3("TEST3",manager);
-        //new TestAction4("TEST4",manager);
-        new AnimalExplode("AnimalsEcplodes",manager);
+
+        new AnimalExplode("Animal Explodes",manager);
+        new RandomEnchantment("Random Enchantment",manager);
+        new RandomPotionEffect("Random Effect",manager);
+        new ZombieAttack("Zombie Attack",manager);
+        new WaterBucketMLG("Water MLG",manager);
         //new Test("TEST",manager);
+
     }
 
 

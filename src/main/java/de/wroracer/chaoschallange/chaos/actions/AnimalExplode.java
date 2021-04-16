@@ -17,20 +17,12 @@ public class AnimalExplode extends Action{
     public void start() {
 
         for(Player p : Bukkit.getServer().getOnlinePlayers()) {
-            List<Entity> near = p.getNearbyEntities(100.0D, 100.0D, 100.0D);
+            List<Entity> near = p.getNearbyEntities(10.0D, 10.0D, 10.0D);
             for(Entity entity : near) {
-                if(entity instanceof Player) {
-                    Player nearPlayer = (Player) entity;
-                    //do stuff here
-                }
-                else{
-                    if (entity.getType() != EntityType.DROPPED_ITEM || entity.getType() != EntityType.PLAYER){
-
-            Location pos = entity.getLocation();
-            pos.getWorld().createExplosion(pos, 10);
-            //pos.getWorld().spawnEntity(pos, EntityType.PRIMED_TNT);
-
-                    }
+                if (entity.getType() != EntityType.DROPPED_ITEM && entity.getType() != EntityType.PLAYER){
+                    Location pos = entity.getLocation();
+                    pos.getWorld().createExplosion(pos, 5);
+                    //pos.getWorld().spawnEntity(pos, EntityType.PRIMED_TNT);
                 }
             }
         }
