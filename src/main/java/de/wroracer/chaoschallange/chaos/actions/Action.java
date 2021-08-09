@@ -28,6 +28,7 @@ public abstract class Action {
         new WaterBucketMLG("Water MLG",manager);
         new PumpkinView("Pumpkin View",manager);
         new Timelapse(manager);
+        new CreeperArmy(manager);
         //new Test("TEST",manager);
         //new TestListender("TEST",manager);
     }
