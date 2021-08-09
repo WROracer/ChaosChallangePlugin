@@ -26,6 +26,7 @@ public abstract class Action {
         new RandomPotionEffect("Random Effect",manager);
         new ZombieAttack("Zombie Attack",manager);
         new WaterBucketMLG("Water MLG",manager);
+        new PumpkinView("Pumpkin View",manager);
         //new Test("TEST",manager);
 
     }
