@@ -27,6 +27,8 @@ public abstract class Action {
         new ZombieAttack("Zombie Attack",manager);
         new WaterBucketMLG("Water MLG",manager);
         new PumpkinView("Pumpkin View",manager);
+        new XpBottles("Xp Bottles", manager);
+        new TpToCave("Teleport to cave", manager);
         //new Test("TEST",manager);
 
     }
