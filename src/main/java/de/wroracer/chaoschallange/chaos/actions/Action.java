@@ -29,8 +29,10 @@ public abstract class Action {
         new PumpkinView("Pumpkin View",manager);
         new XpBottles("Xp Bottles", manager);
         new TpToCave("Teleport to cave", manager);
+        new Timelapse(manager);
+        new CreeperArmy(manager);
         //new Test("TEST",manager);
-
+        //new TestListender("TEST",manager);
     }
 
 

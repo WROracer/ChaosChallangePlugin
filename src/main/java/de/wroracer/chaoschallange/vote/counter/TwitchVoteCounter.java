@@ -1,24 +1,18 @@
 package de.wroracer.chaoschallange.vote.counter;
 
 import com.github.philippheuer.credentialmanager.domain.OAuth2Credential;
-import com.github.philippheuer.events4j.core.EventManager;
 import com.github.twitch4j.TwitchClient;
 import com.github.twitch4j.TwitchClientBuilder;
-import com.github.twitch4j.auth.providers.TwitchIdentityProvider;
-import com.github.twitch4j.chat.TwitchChat;
-import com.github.twitch4j.chat.TwitchChatBuilder;
 import com.github.twitch4j.chat.events.channel.ChannelMessageEvent;
-import com.github.twitch4j.common.util.EventManagerUtils;
 import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.config.MainConfig;
 import org.bukkit.Bukkit;
 
-//import javax.xml.bind.Marshaller;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.function.Consumer;
-import de.wroracer.chaoschallange.config.MainConfig;
+
+//import javax.xml.bind.Marshaller;
 
 public class TwitchVoteCounter {
 
@@ -66,6 +60,7 @@ public class TwitchVoteCounter {
                 }
             }
         });
+
         channels.forEach(channel->{
             System.out.println("Connecting To Twitch Channel: "+channel);
             client.getChat().sendMessage(channel,"Chaos Online");
@@ -73,11 +68,14 @@ public class TwitchVoteCounter {
         });
     }
     public void disconect(){
-        channels.forEach(channel->{
-            client.getChat().leaveChannel(channel);
-        });
-        client.getChat().leaveChannel(channelName);
-        client.getChat().disconnect();
+        try {
+            channels.forEach(channel->{
+                client.getChat().leaveChannel(channel);
+            });
+            client.getChat().leaveChannel(channelName);
+            client.getChat().disconnect();
+        }catch (Exception ignored){}
+
     }
 
 
