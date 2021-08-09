@@ -13,9 +13,12 @@ public final class ChaosChallange extends JavaPlugin {
 
     private final String prefix = "[ChaosPL] ";
 
+    public static ChaosChallange INSTANCE ;
+
     private ChaosManager manager;
     @Override
     public void onEnable() {
+        INSTANCE = this;
         // Plugin startup logic
         manager = new ChaosManager(this);
         Action.registerActions(manager);

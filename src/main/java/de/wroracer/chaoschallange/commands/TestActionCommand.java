@@ -2,6 +2,7 @@ package de.wroracer.chaoschallange.commands;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
 import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.config.MainConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,10 +17,12 @@ import java.util.List;
 public class TestActionCommand implements CommandExecutor, TabCompleter {
     private ChaosManager chaosManager;
     private List<Action> actions;
+    private final MainConfig config;
 
     public TestActionCommand(ChaosManager chaosManager) {
         this.chaosManager = chaosManager;
         actions = chaosManager.getActions();
+        this.config = new MainConfig();
     }
 
     @Override
@@ -38,7 +41,7 @@ public class TestActionCommand implements CommandExecutor, TabCompleter {
                     public void run() {
                         action.stop();
                     }
-                }, 20*60);
+                }, 20* config.getVotingTime());
             }
         });
         return false;
