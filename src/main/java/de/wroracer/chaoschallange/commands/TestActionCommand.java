@@ -2,7 +2,6 @@ package de.wroracer.chaoschallange.commands;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
 import de.wroracer.chaoschallange.chaos.actions.Action;
-import de.wroracer.chaoschallange.config.MainConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,12 +33,12 @@ public class TestActionCommand implements CommandExecutor, TabCompleter {
         actions.forEach(action -> {
             if (action.getName().equals(finalCmd.replaceFirst(" ", ""))){
                 action.start();
-                Bukkit.getScheduler().scheduleSyncRepeatingTask(chaosManager.getPlugin(), new Runnable() {
+                Bukkit.getScheduler().scheduleSyncDelayedTask(chaosManager.getPlugin(), new Runnable() {
                     @Override
                     public void run() {
                         action.stop();
                     }
-                }, 30*60,20);
+                }, 20*60);
             }
         });
         return false;

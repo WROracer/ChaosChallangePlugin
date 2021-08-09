@@ -16,7 +16,7 @@ public class WaterBucketMLG extends Action{
     public void start() {
         Bukkit.getOnlinePlayers().forEach(player -> {
             ItemStack iteminMainHand = player.getInventory().getItemInMainHand();
-            player.getInventory().setItemInMainHand(new ItemBuilder(Material.WATER_BUCKET).buid());
+            player.getInventory().setItemInMainHand(new ItemBuilder(Material.WATER_BUCKET).setName("MLG-Bucket").buid());
             player.getInventory().addItem(iteminMainHand);
             Location playerloc = player.getLocation();
             playerloc.setY(255);
