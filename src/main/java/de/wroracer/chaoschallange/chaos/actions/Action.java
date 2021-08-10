@@ -35,6 +35,7 @@ public abstract class Action {
         new Timelapse(manager);
         new CreeperArmy(manager);
         new LagSimulator("Lag",manager);
+        new ThunderStorm("ThunderStorm",manager);
         //new Test("TEST",manager);
         //new TestListender("TEST",manager);
     }
