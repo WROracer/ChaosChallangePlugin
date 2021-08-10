@@ -34,6 +34,8 @@ public abstract class Action {
         new PumpkinView("Pumpkin View",manager);
         new Timelapse(manager);
         new CreeperArmy(manager);
+        new ReplaceAllWater("Replace all water with lava", manager);
+        new DropAllItems("Drop all items", manager);
         //new Test("TEST",manager);
         //new TestListender("TEST",manager);
     }
