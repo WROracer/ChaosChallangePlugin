@@ -50,7 +50,13 @@ public class TestActionCommand implements CommandExecutor, TabCompleter {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         List<String> back = new ArrayList<>();
-        actions.forEach(action -> {back.add(action.getName());});
+        if (strings.length >= 1) {
+            actions.forEach(action -> {
+                if (action.getName().startsWith(strings[0])) {
+                    back.add(action.getName());
+                }
+            });
+        }
         return back;
     }
 }
