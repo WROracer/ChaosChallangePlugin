@@ -38,6 +38,10 @@ public abstract class Action {
         new DropAllItems("Drop all items", manager);
         new LagSimulator("Lag",manager);
         new ThunderStorm("ThunderStorm",manager);
+
+        //Temp Disabled (Bugy)
+        //new FakeDeath("Death",manager);
+
         //new Test("TEST",manager);
         //new TestListender("TEST",manager);
     }

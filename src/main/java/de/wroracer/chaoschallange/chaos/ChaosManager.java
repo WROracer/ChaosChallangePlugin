@@ -236,13 +236,13 @@ public class ChaosManager implements Listener {
         }
         Action toActivate = toSelect.get(rnd.nextInt(toSelect.size()));
         lastAction = toActivate;
-        lastAction.start();
         Bukkit.broadcastMessage("§2Event: §6"+lastAction.getName());
         actions.add(action1);
         actions.add(action2);
         actions.add(action3);
         useOneTwoThree = !useOneTwoThree;
         if (isActivated) {
+            lastAction.start();
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,toActivate::stop,toActivate.getActionTime()*20);
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::startVoting);
         }else {

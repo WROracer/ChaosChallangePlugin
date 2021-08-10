@@ -55,7 +55,7 @@ public class ReplaceAllWater extends Action {
                     block.setType(Material.LAVA);
                 }
 
-                this.toReplace.clear();
+                //this.toReplace.clear();
             }
 
         }, 0L, 20L);
