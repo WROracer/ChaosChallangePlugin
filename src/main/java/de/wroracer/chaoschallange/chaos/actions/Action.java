@@ -16,6 +16,11 @@ public abstract class Action {
 
     public ChaosManager getManager(){return manager;}
 
+    public int getActionTime(){
+        return manager.getVoteTime();
+    }
+
+
     public abstract void start();
     public abstract void stop();
 
@@ -32,4 +37,5 @@ public abstract class Action {
         //new Test("TEST",manager);
         //new TestListender("TEST",manager);
     }
+
 }

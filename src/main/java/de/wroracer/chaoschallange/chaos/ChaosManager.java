@@ -160,10 +160,6 @@ public class ChaosManager implements Listener {
         vote3 = 1;
         vote4 = 1;
 
-        if (lastAction != null){
-            lastAction.stop();
-        }
-
         Random rnd = new Random();
         action1 = actions.get(rnd.nextInt(actions.size()));
         actions.remove(action1);
@@ -219,6 +215,9 @@ public class ChaosManager implements Listener {
     }
 
     private void endVoting(){
+        /*if (lastAction != null){
+            lastAction.stop();
+        }*/
         Random rnd = new Random();
         Action action4 = actions.get(rnd.nextInt(actions.size()));
         List<Action> toSelect = new ArrayList<>();
@@ -235,7 +234,8 @@ public class ChaosManager implements Listener {
         for (int i = vote4;i!=0;i--){
             toSelect.add(action4);
         }
-        lastAction = toSelect.get(rnd.nextInt(toSelect.size()));
+        Action toActivate = toSelect.get(rnd.nextInt(toSelect.size()));
+        lastAction = toActivate;
         lastAction.start();
         Bukkit.broadcastMessage("§2Event: §6"+lastAction.getName());
         actions.add(action1);
@@ -243,6 +243,7 @@ public class ChaosManager implements Listener {
         actions.add(action3);
         useOneTwoThree = !useOneTwoThree;
         if (isActivated) {
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,toActivate::stop,toActivate.getActionTime()*20);
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::startVoting);
         }else {
             deac();
