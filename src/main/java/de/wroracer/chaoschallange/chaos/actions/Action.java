@@ -16,6 +16,11 @@ public abstract class Action {
 
     public ChaosManager getManager(){return manager;}
 
+    public int getActionTime(){
+        return manager.getVoteTime();
+    }
+
+
     public abstract void start();
     public abstract void stop();
 
@@ -27,14 +32,9 @@ public abstract class Action {
         new ZombieAttack("Zombie Attack",manager);
         new WaterBucketMLG("Water MLG",manager);
         new PumpkinView("Pumpkin View",manager);
-        new XpBottles("Xp Bottles", manager);
-        new TpToCave("Teleport to cave", manager);
         new Timelapse(manager);
         new CreeperArmy(manager);
         //new Test("TEST",manager);
         //new TestListender("TEST",manager);
     }
-
-
-
 }
