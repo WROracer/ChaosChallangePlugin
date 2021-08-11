@@ -41,7 +41,7 @@ public class TestActionCommand implements CommandExecutor, TabCompleter {
                     public void run() {
                         action.stop();
                     }
-                }, 20* config.getVotingTime());
+                }, 20*action.getActionTime());
             }
         });
         return false;
