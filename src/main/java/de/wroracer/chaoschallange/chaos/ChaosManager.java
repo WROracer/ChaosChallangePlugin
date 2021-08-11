@@ -37,7 +37,6 @@ public class ChaosManager implements Listener {
     private final String randomName = "Random event";
 
 
-
     private Action action1;
     private Action action2;
     private Action action3;
@@ -61,16 +60,16 @@ public class ChaosManager implements Listener {
         return plugin;
     }
 
-    public ChaosManager(ChaosChallange plugin){
+    public ChaosManager(ChaosChallange plugin) {
         this.plugin = plugin;
         actions = new ArrayList<>();
         allActions = new ArrayList<>();
         conf = new MainConfig();
 
-        twitchVoteCounter = new TwitchVoteCounter(this,conf);
+        twitchVoteCounter = new TwitchVoteCounter(this, conf);
 
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-        board = scoreboard.registerNewObjective("board","dummy","§6Vote-Board");
+        board = scoreboard.registerNewObjective("board", "dummy", "§6Vote-Board");
         board.setDisplaySlot(DisplaySlot.SIDEBAR);
         board.getScore("Waiting").setScore(1);
 
@@ -95,35 +94,36 @@ public class ChaosManager implements Listener {
     }
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event){
+    public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        event.setJoinMessage(player.getDisplayName()+" ist der Challange beigetreten");
+        event.setJoinMessage(player.getDisplayName() + " ist der Challange beigetreten");
         player.setScoreboard(scoreboard);
         bossBar.addPlayer(player);
     }
 
-    public void addAction(Action action){
+    public void addAction(Action action) {
         actions.add(action);
         allActions.add(action);
     }
 
-    public void activate(){
+    public void activate() {
         isActivated = true;
         useOneTwoThree = true;
         scoreboard.resetScores("Waiting");
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::startVoting);
     }
 
-    public void deactivate(){
+    public void deactivate() {
         isActivated = false;
     }
-    private void deac(){
+
+    private void deac() {
         try {
             scoreboard.resetScores(action1.getName());
             scoreboard.resetScores(action2.getName());
             scoreboard.resetScores(action3.getName());
             scoreboard.resetScores(randomName);
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
         board.getScore("Waiting").setScore(1);
@@ -131,9 +131,10 @@ public class ChaosManager implements Listener {
 
 
     private int timeBosBar = 0;
-    private void bossbarUpdate(){
+
+    private void bossbarUpdate() {
         double prossec = (timeBosBar * 100.0f) / voteTime;
-        bossBar.setProgress(prossec/100);
+        bossBar.setProgress(prossec / 100);
         timeBosBar--;
     }
 
@@ -144,13 +145,13 @@ public class ChaosManager implements Listener {
         return voteTime;
     }
 
-    private void startVoting(){
+    private void startVoting() {
         try {
             scoreboard.resetScores(action1.getName());
             scoreboard.resetScores(action2.getName());
             scoreboard.resetScores(action3.getName());
             scoreboard.resetScores(randomName);
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
 
@@ -168,12 +169,12 @@ public class ChaosManager implements Listener {
         action3 = actions.get(rnd.nextInt(actions.size()));
         actions.remove(action3);
 
-        if (useOneTwoThree){
+        if (useOneTwoThree) {
             board.getScore(action1.getName()).setScore(1);
             board.getScore(action2.getName()).setScore(2);
             board.getScore(action3.getName()).setScore(3);
             board.getScore(randomName).setScore(4);
-        }else {
+        } else {
             board.getScore(action1.getName()).setScore(6);
             board.getScore(action2.getName()).setScore(7);
             board.getScore(action3.getName()).setScore(8);
@@ -182,39 +183,47 @@ public class ChaosManager implements Listener {
         twitchVoteCounter.hasVoted.clear();
         if (isActivated) {
             timeBosBar = voteTime;
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::endVoting,voteTime*20);
-            int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin,this::bossbarUpdate,20,20);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,()->{
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::endVoting, voteTime * 20);
+            int id = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, this::bossbarUpdate, 20, 20);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 Bukkit.getScheduler().cancelTask(id);
-            },voteTime*20);
-        }else {
+            }, voteTime * 20);
+        } else {
             deac();
         }
     }
 
-    public void stop(){
+    public void stop() {
         twitchVoteCounter.disconect();
         bossBar.removeAll();
     }
 
-    public void vote(int nbr){
-        switch (nbr){
+    public void vote(int nbr) {
+        switch (nbr) {
             case 1:
             case 6:
-                vote1++;System.out.println("Register vote 1"); break;
+                vote1++;
+                System.out.println("Register vote 1");
+                break;
             case 2:
             case 7:
-                vote2++;System.out.println("Register vote 2");break;
+                vote2++;
+                System.out.println("Register vote 2");
+                break;
             case 3:
             case 8:
-                vote3++;System.out.println("Register vote 3");break;
+                vote3++;
+                System.out.println("Register vote 3");
+                break;
             case 4:
             case 9:
-                vote4++;System.out.println("Register vote 4");break;
+                vote4++;
+                System.out.println("Register vote 4");
+                break;
         }
     }
 
-    private void endVoting(){
+    private void endVoting() {
         /*if (lastAction != null){
             lastAction.stop();
         }*/
@@ -222,30 +231,30 @@ public class ChaosManager implements Listener {
         Action action4 = actions.get(rnd.nextInt(actions.size()));
         List<Action> toSelect = new ArrayList<>();
 
-        for (int i = vote1;i!=0;i--){
+        for (int i = vote1; i != 0; i--) {
             toSelect.add(action1);
         }
-        for (int i = vote2;i!=0;i--){
+        for (int i = vote2; i != 0; i--) {
             toSelect.add(action2);
         }
-        for (int i = vote3;i!=0;i--){
+        for (int i = vote3; i != 0; i--) {
             toSelect.add(action3);
         }
-        for (int i = vote4;i!=0;i--){
+        for (int i = vote4; i != 0; i--) {
             toSelect.add(action4);
         }
         Action toActivate = toSelect.get(rnd.nextInt(toSelect.size()));
         lastAction = toActivate;
-        Bukkit.broadcastMessage("§2Event: §6"+lastAction.getName());
+        Bukkit.broadcastMessage("§2Event: §6" + lastAction.getName());
         actions.add(action1);
         actions.add(action2);
         actions.add(action3);
         useOneTwoThree = !useOneTwoThree;
         if (isActivated) {
             lastAction.start();
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin,toActivate::stop,toActivate.getActionTime()*20);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, toActivate::stop, toActivate.getActionTime() * 20);
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::startVoting);
-        }else {
+        } else {
             deac();
         }
     }
