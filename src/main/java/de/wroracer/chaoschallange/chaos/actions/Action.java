@@ -41,6 +41,8 @@ public abstract class Action {
         new TpToCave("Teleport to next cave", manager);
         new XpBottles("Give Xp", manager);
 
+        new RandomizeItems(manager);
+
         //Temp Disabled (Bugy)
         //new FakeDeath("Death",manager);
       
