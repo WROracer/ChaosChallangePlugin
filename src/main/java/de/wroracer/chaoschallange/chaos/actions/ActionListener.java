@@ -9,4 +9,17 @@ public abstract class ActionListener extends Action implements Listener {
         super(name, manager);
         Bukkit.getPluginManager().registerEvents(this,manager.getPlugin());
     }
+
+    public boolean isActive = false;
+
+
+    @Override
+    public void start() {
+        isActive = true;
+    }
+
+    @Override
+    public void stop() {
+        isActive = false;
+    }
 }

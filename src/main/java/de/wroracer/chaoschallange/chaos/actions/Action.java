@@ -1,6 +1,7 @@
 package de.wroracer.chaoschallange.chaos.actions;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.chaos.actions.bad.*;
 import de.wroracer.chaoschallange.chaos.actions.bad.AnimalExplode;
 import de.wroracer.chaoschallange.chaos.actions.bad.CreeperArmy;
 import de.wroracer.chaoschallange.chaos.actions.bad.ReplaceAllWater;
@@ -56,6 +57,8 @@ public abstract class Action {
         new LagSimulator("Lag",manager);
         new ThunderStorm("ThunderStorm",manager);
         new TpToCave("Teleport to next cave", manager);
+
+        new DealNoDamage("No Damage",manager);
 
 
 
