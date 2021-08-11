@@ -34,10 +34,16 @@ public abstract class Action {
         new PumpkinView("Pumpkin View",manager);
         new Timelapse(manager);
         new CreeperArmy(manager);
-        new ReplaceAllWater("Replace all water with lava", manager);
+        new ReplaceAllWater("Replace water with lava", manager);
         new DropAllItems("Drop all items", manager);
         new LagSimulator("Lag",manager);
         new ThunderStorm("ThunderStorm",manager);
+        new TpToCave("Teleport to next cave", manager);
+        new XpBottles("Give Xp", manager);
+
+        //Temp Disabled (Bugy)
+        //new FakeDeath("Death",manager);
+      
         //new Test("TEST",manager);
         //new TestListender("TEST",manager);
     }
