@@ -29,16 +29,16 @@ public class ReplaceAllWater extends Action {
         this.schedulerID = Bukkit.getScheduler().scheduleSyncRepeatingTask(this.getManager().getPlugin(), () -> {
             Iterator var1 = Bukkit.getServer().getOnlinePlayers().iterator();
 
-            while(var1.hasNext()) {
-                Player p = (Player)var1.next();
+            while (var1.hasNext()) {
+                Player p = (Player) var1.next();
                 Location position = p.getLocation();
                 int startPosX = position.getBlockX() - this.radius / 2;
                 int startPosY = position.getBlockY() - this.radius / 2;
                 int startPosZ = position.getBlockZ() - this.radius / 2;
 
-                for(int x = startPosX; x < this.radius + startPosX; ++x) {
-                    for(int y = startPosY; y < this.radius + startPosY; ++y) {
-                        for(int z = startPosZ; z < this.radius + startPosZ; ++z) {
+                for (int x = startPosX; x < this.radius + startPosX; ++x) {
+                    for (int y = startPosY; y < this.radius + startPosY; ++y) {
+                        for (int z = startPosZ; z < this.radius + startPosZ; ++z) {
                             Block currentBlock = p.getWorld().getBlockAt(x, y, z);
                             if (currentBlock.getType() == Material.WATER) {
                                 this.toReplace.add(currentBlock);
@@ -50,18 +50,20 @@ public class ReplaceAllWater extends Action {
 
                 Iterator var11 = this.toReplace.iterator();
 
-                while(var11.hasNext()) {
-                    Block block = (Block)var11.next();
-                    block.setType(Material.LAVA);
+                while (var11.hasNext()) {
+                    Block block = (Block) var11.next();
+                    if (block.getType() == Material.AIR || block.getType() == Material.OBSIDIAN) {
+                        block.setType(Material.LAVA);
+                    }
                 }
 
-                //this.toReplace.clear();
             }
 
         }, 0L, 20L);
     }
 
     public void stop() {
+        this.toReplace.clear();
         Bukkit.getScheduler().cancelTask(this.schedulerID);
     }
 }
