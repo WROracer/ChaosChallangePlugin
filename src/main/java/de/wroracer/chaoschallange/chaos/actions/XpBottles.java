@@ -18,7 +18,7 @@ public class XpBottles extends Action{
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
             Location pos = p.getLocation();
             World world = pos.getWorld();
-            for (int i = 0; i< 100; i++){
+            for (int i = 0; i< 50; i++){
             world.spawnEntity(pos, EntityType.THROWN_EXP_BOTTLE);
             }
 

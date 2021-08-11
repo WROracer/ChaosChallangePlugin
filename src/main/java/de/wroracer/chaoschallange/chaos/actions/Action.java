@@ -27,8 +27,6 @@ public abstract class Action {
     public static void registerActions(ChaosManager manager){
 
         new AnimalExplode("Animal Explodes",manager);
-        new RandomEnchantment("Random Enchantment",manager);
-        new RandomPotionEffect("Random Effect",manager);
         new ZombieAttack("Zombie Attack",manager);
         new WaterBucketMLG("Water MLG",manager);
         new PumpkinView("Pumpkin View",manager);
@@ -39,7 +37,17 @@ public abstract class Action {
         new LagSimulator("Lag",manager);
         new ThunderStorm("ThunderStorm",manager);
         new TpToCave("Teleport to next cave", manager);
+
+
+
+
+        // Good Stuff
         new XpBottles("Give Xp", manager);
+        new RandomEnchantment("Random Enchantment",manager);
+        new RandomPotionEffect("Random Effect",manager);
+        new MakeDay("Make day", manager);
+        new TpToSurface("Tp to surface", manager);
+        new StopRain("Stop rain", manager);
 
         new RandomizeItems(manager);
         new MobRegen(manager);

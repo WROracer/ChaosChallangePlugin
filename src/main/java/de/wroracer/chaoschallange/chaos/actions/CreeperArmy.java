@@ -12,7 +12,7 @@ import java.util.List;
 
 public class CreeperArmy extends Action{
     public CreeperArmy(ChaosManager manager) {
-        super("Boooo", manager);
+        super("Replace mobs with creepers", manager);
     }
 
     private int schedulerID = 0;
