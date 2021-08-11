@@ -1,6 +1,7 @@
-package de.wroracer.chaoschallange.chaos.actions;
+package de.wroracer.chaoschallange.chaos.actions.common;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.chaos.actions.Action;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
@@ -12,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class RandomEnchantment extends Action{
+public class RandomEnchantment extends Action {
 
     private List<Enchantment> enchantmentList = new ArrayList<>();
 

@@ -1,13 +1,14 @@
-package de.wroracer.chaoschallange.chaos.actions;
+package de.wroracer.chaoschallange.chaos.actions.common;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.chaos.actions.Action;
 import de.wroracer.chaoschallange.util.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class WaterBucketMLG extends Action{
+public class WaterBucketMLG extends Action {
     public WaterBucketMLG(String name, ChaosManager manager) {
         super(name, manager);
     }

@@ -1,6 +1,7 @@
-package de.wroracer.chaoschallange.chaos.actions;
+package de.wroracer.chaoschallange.chaos.actions.common;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.chaos.actions.Action;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;

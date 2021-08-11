@@ -1,6 +1,7 @@
-package de.wroracer.chaoschallange.chaos.actions;
+package de.wroracer.chaoschallange.chaos.actions.common;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.chaos.actions.ActionListener;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MobRegen extends ActionListener{
+public class MobRegen extends ActionListener {
     public MobRegen( ChaosManager manager) {
         super("Mob Regen", manager);
     }

@@ -1,13 +1,14 @@
-package de.wroracer.chaoschallange.chaos.actions;
+package de.wroracer.chaoschallange.chaos.actions.common;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.chaos.actions.Action;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import java.util.Objects;
 import java.util.Random;
 
-public class ThunderStorm extends Action{
+public class ThunderStorm extends Action {
     public ThunderStorm(String name, ChaosManager manager) {
         super(name, manager);
     }
