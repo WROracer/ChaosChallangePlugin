@@ -49,6 +49,8 @@ public abstract class Action {
         new TpToSurface("Tp to surface", manager);
         new StopRain("Stop rain", manager);
 
+        new RandomizeItems(manager);
+
         //Temp Disabled (Bugy)
         //new FakeDeath("Death",manager);
       
