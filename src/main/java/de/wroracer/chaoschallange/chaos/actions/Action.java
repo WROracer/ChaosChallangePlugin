@@ -42,6 +42,7 @@ public abstract class Action {
         new XpBottles("Give Xp", manager);
 
         new RandomizeItems(manager);
+        new MobRegen(manager);
 
         //Temp Disabled (Bugy)
         //new FakeDeath("Death",manager);

@@ -119,10 +119,9 @@ public class ChaosManager implements Listener {
 
     private void deac() {
         try {
-            scoreboard.resetScores(action1.getName());
-            scoreboard.resetScores(action2.getName());
-            scoreboard.resetScores(action3.getName());
-            scoreboard.resetScores(randomName);
+            scoreboard.getEntries().forEach(entry->{
+                scoreboard.resetScores(entry);
+            });
         } catch (Exception ignored) {
 
         }
@@ -147,10 +146,9 @@ public class ChaosManager implements Listener {
 
     private void startVoting() {
         try {
-            scoreboard.resetScores(action1.getName());
-            scoreboard.resetScores(action2.getName());
-            scoreboard.resetScores(action3.getName());
-            scoreboard.resetScores(randomName);
+            scoreboard.getEntries().forEach(entry->{
+                scoreboard.resetScores(entry);
+            });
         } catch (Exception ignored) {
 
         }
@@ -180,6 +178,8 @@ public class ChaosManager implements Listener {
             board.getScore(action3.getName()).setScore(8);
             board.getScore(randomName).setScore(9);
         }
+        if (lastAction!=null)
+            board.getScore("Current: "+lastAction.getName()).setScore(-1);
         twitchVoteCounter.hasVoted.clear();
         if (isActivated) {
             timeBosBar = voteTime;
@@ -194,8 +194,8 @@ public class ChaosManager implements Listener {
     }
 
     public void stop() {
-        twitchVoteCounter.disconect();
         bossBar.removeAll();
+        twitchVoteCounter.disconect();
     }
 
     public void vote(int nbr) {
