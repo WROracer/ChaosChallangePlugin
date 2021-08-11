@@ -40,6 +40,10 @@ public abstract class Action {
         new ThunderStorm("ThunderStorm",manager);
         new TpToCave("Teleport to next cave", manager);
         new XpBottles("Give Xp", manager);
+
+        //Temp Disabled (Bugy)
+        //new FakeDeath("Death",manager);
+      
         //new Test("TEST",manager);
         //new TestListender("TEST",manager);
     }
