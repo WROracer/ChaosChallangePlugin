@@ -17,7 +17,7 @@ public class WaterBucketMLG extends Action {
         super(name, manager);
     }
 
-    private HashMap<Player, Location> positions = new HashMap<>();
+    private transient HashMap<Player, Location> positions = new HashMap<>();
 
     private int schedulerID = 0;
     private final int dropHeight = 100;

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomPotionEffect extends Action {
-    List<PotionEffectType> potionEffects = new ArrayList<>();
+    private transient List<PotionEffectType> potionEffects = new ArrayList<>();
     private transient ChaosManager chaosManager;
     public RandomPotionEffect(String name, ChaosManager manager) {
         super(name, manager);
