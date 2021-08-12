@@ -29,6 +29,7 @@ public class WaterBucketMLG extends ActionListener {
 
     @Override
     public void start() {
+        super.start();
         isActivated = true;
         Bukkit.getOnlinePlayers().forEach(player -> {
             ItemStack iteminMainHand = player.getInventory().getItemInMainHand();
@@ -98,6 +99,7 @@ public class WaterBucketMLG extends ActionListener {
 
     @Override
     public void stop() {
+        super.stop();
         isActivated = false;
         positions.forEach(Entity::teleport);
         positions.clear();

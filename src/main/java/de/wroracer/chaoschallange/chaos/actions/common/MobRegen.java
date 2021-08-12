@@ -23,6 +23,7 @@ public class MobRegen extends ActionListener {
 
     @Override
     public void start() {
+        super.start();
         List<EntityType> entitys = new ArrayList<>();
         for (EntityType type : EntityType.values()) {
             if (type.isAlive() && type != EntityType.ENDER_DRAGON){
@@ -55,6 +56,7 @@ public class MobRegen extends ActionListener {
 
     @Override
     public void stop() {
+        super.stop();
         Bukkit.getScheduler().cancelTask(schedulerID);
         schedulerID = 0;
     }

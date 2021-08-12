@@ -24,12 +24,14 @@ public class LagSimulator extends TimedAction {
     @Override
     public void trigger() {
         Bukkit.getOnlinePlayers().forEach(player -> {
-            locs.computeIfAbsent(player, k -> new Location[2]);
-            locs.get(player)[0] = player.getLocation();
+            Location loc = player.getLocation();
+            Bukkit.getScheduler().scheduleSyncDelayedTask(getManager().getPlugin(), ()->player.teleport(loc),10);
+           /* locs.computeIfAbsent(player, k -> new Location[2]);
             if (locs.get(player)[1]!=null){
                 player.teleport(locs.get(player)[1]);
             }
-            locs.put(player,changePos(locs.get(player)));
+            locs.get(player)[0] = player.getLocation();
+            locs.put(player,changePos(locs.get(player)));*/
         });
     }
 }
