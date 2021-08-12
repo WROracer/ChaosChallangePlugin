@@ -18,6 +18,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+import spark.Filter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,6 +104,12 @@ public class ChaosManager implements Listener {
 
     public void registerSpark(){
         port(conf.getRestPort());
+
+        after((Filter) (request, response) -> {
+            response.header("Access-Control-Allow-Origin", "*");
+            response.header("Access-Control-Allow-Methods", "GET");
+        });
+
         get("/chaos",(request, response) ->{
                 response.type("application/json");
                 System.out.println("GET Request /chaos");

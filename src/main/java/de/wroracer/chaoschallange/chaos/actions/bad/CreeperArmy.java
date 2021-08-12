@@ -17,8 +17,6 @@ public class CreeperArmy extends TimedAction {
         super("Replace mobs with creepers", manager,20*5,20*5);
     }
 
-
-
     @Override
     public void trigger() {
         Bukkit.getOnlinePlayers().forEach(player -> {
