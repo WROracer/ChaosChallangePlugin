@@ -16,24 +16,13 @@ import java.util.function.Consumer;
 
 public class TwitchVoteCounter {
 
-    private  TwitchClient client;
-    private String channelName = "wroracer";
-
-    private ChaosManager manager;
+    private final TwitchClient client;
 
     public List<String> hasVoted;
-    private List<String> channels;
+    private final List<String> channels;
 
     public TwitchVoteCounter( ChaosManager manager,MainConfig config) {
-        this.manager = manager;
-        channels = new ArrayList<>();
-        String channelTemp = config.getChannel();
-        System.out.println(channelTemp);
-        for (String temp:channelTemp.split("::")) {
-            System.out.println(temp);
-            channels.add(temp);
-        }
-        channelName = config.getChannel();
+        channels = config.getChannel();
 
         hasVoted = new ArrayList<>();
         OAuth2Credential credential = new OAuth2Credential("twitch", config.getOAuth2());
@@ -72,7 +61,6 @@ public class TwitchVoteCounter {
             channels.forEach(channel->{
                 client.getChat().leaveChannel(channel);
             });
-            client.getChat().leaveChannel(channelName);
             client.getChat().disconnect();
         }catch (Exception ignored){}
 
