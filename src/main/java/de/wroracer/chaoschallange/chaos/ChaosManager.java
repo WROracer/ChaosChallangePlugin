@@ -1,7 +1,10 @@
 package de.wroracer.chaoschallange.chaos;
 
+import com.google.gson.Gson;
 import de.wroracer.chaoschallange.ChaosChallange;
 import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.chaos.rest.RestResponse;
+import de.wroracer.chaoschallange.chaos.rest.VotingAction;
 import de.wroracer.chaoschallange.config.MainConfig;
 import de.wroracer.chaoschallange.vote.counter.TwitchVoteCounter;
 import org.bukkit.Bukkit;
@@ -20,11 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static spark.Spark.*;
+
 public class ChaosManager implements Listener {
 
     private ChaosChallange plugin;
 
     private List<Action> actions;
+    private List<Action> activeActions;
     private List<Action> allActions;
     private Scoreboard scoreboard;
     private Objective board;
@@ -65,6 +71,7 @@ public class ChaosManager implements Listener {
         actions = new ArrayList<>();
         allActions = new ArrayList<>();
         conf = new MainConfig();
+        activeActions = new ArrayList<>();
 
         twitchVoteCounter = new TwitchVoteCounter(this, conf);
 
@@ -90,7 +97,18 @@ public class ChaosManager implements Listener {
         isActivated = false;
 
         lastAction = null;
+        registerSpark();
 
+    }
+
+    public void registerSpark(){
+        port(conf.getRestPort());
+        get("/chaos",(request, response) ->{
+                response.type("application/json");
+                System.out.println("GET Request /chaos");
+                return new Gson().toJson(
+                        new RestResponse(activeActions,new VotingAction(action1,vote1),new VotingAction(action2,vote2),new VotingAction(action3,vote3),vote4,timeBosBar,isActivated,voteTime));
+        });
     }
 
     @EventHandler
@@ -154,10 +172,10 @@ public class ChaosManager implements Listener {
         }
 
 
-        vote1 = 1;
-        vote2 = 1;
-        vote3 = 1;
-        vote4 = 1;
+        vote1 = 0;
+        vote2 = 0;
+        vote3 = 0;
+        vote4 = 0;
 
         Random rnd = new Random();
         action1 = actions.get(rnd.nextInt(actions.size()));
@@ -243,6 +261,12 @@ public class ChaosManager implements Listener {
         for (int i = vote4; i != 0; i--) {
             toSelect.add(action4);
         }
+        if (toSelect.size() == 0){
+            toSelect.add(action1);
+            toSelect.add(action2);
+            toSelect.add(action3);
+            toSelect.add(action4);
+        }
         Action toActivate = toSelect.get(rnd.nextInt(toSelect.size()));
         lastAction = toActivate;
         Bukkit.broadcastMessage("§2Event: §6" + lastAction.getName());
@@ -252,7 +276,11 @@ public class ChaosManager implements Listener {
         useOneTwoThree = !useOneTwoThree;
         if (isActivated) {
             lastAction.start();
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, toActivate::stop, toActivate.getActionTime() * 20);
+            activeActions.add(toActivate);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, ()->{
+                toActivate.stop();
+                activeActions.remove(toActivate);
+            }, toActivate.getActionTime() * 20);
             Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::startVoting);
         } else {
             deac();

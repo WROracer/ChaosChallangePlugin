@@ -26,7 +26,7 @@ public class MainConfig {
                cfg.set("Twitch.Channel","Twitch LiveStream Kannal");
                 cfg.set("Twitch.OAuth2","Twitch Username OAuth2");
                 cfg.set("Chaos.Voting.Time",60);
-
+                cfg.set("Chaos.rest.port",4567);
                 cfg.save(file);
             } catch (IOException ignored) {
             }
@@ -40,5 +40,8 @@ public class MainConfig {
     }
     public int getVotingTime(){
         return cfg.getInt("Chaos.Voting.Time");
+    }
+    public int getRestPort(){
+        return cfg.getInt("Chaos.rest.port");
     }
 }

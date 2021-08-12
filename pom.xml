@@ -101,6 +101,13 @@
             <version>1.2.1</version>
         </dependency>
 
+        <!--Spark-->
+        <dependency>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-core</artifactId>
+            <version>2.9.3</version>
+        </dependency>
+
         <!--YT-Integration-->
        <!-- <dependency>
             <groupId>com.google.apis</groupId>

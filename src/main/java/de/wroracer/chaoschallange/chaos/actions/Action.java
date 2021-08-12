@@ -25,7 +25,9 @@ import de.wroracer.chaoschallange.chaos.actions.good.XpBottles;
 public abstract class Action {
 
     private String name;
-    private ChaosManager manager;
+    private transient ChaosManager manager;
+
+
     public Action(String name, ChaosManager manager){
         this.name = name;
         this.manager = manager;

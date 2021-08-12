@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class RandomEnchantment extends Action {
 
-    private List<Enchantment> enchantmentList = new ArrayList<>();
+    private transient List<Enchantment> enchantmentList = new ArrayList<>();
 
     public RandomEnchantment(String name, ChaosManager manager) {
         super(name, manager);

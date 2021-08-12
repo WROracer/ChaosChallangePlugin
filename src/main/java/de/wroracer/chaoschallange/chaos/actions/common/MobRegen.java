@@ -19,7 +19,7 @@ public class MobRegen extends ActionListener {
         super("Mob Regen", manager);
     }
 
-    private int schedulerID = 0;
+    private transient int schedulerID = 0;
 
     @Override
     public void start() {

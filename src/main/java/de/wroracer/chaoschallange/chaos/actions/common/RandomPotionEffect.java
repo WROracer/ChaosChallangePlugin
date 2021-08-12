@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class RandomPotionEffect extends Action {
     List<PotionEffectType> potionEffects = new ArrayList<>();
-    private ChaosManager chaosManager;
+    private transient ChaosManager chaosManager;
     public RandomPotionEffect(String name, ChaosManager manager) {
         super(name, manager);
         PotionEffectType[] potionEffectstemp = PotionEffectType.values();
