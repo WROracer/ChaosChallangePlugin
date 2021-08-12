@@ -17,6 +17,7 @@ public class TpToSurface extends Action {
     public void start() {
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
             Location pos = p.getLocation();
+            if (p.getWorld().getBlockAt(pos).getType() == Material.AIR)return;
 
             int x = pos.getBlockX();
             int z = pos.getBlockZ();

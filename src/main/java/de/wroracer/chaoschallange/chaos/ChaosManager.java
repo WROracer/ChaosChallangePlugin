@@ -114,7 +114,7 @@ public class ChaosManager implements Listener {
         get("/chaos",(request, response) ->{
                 response.type("application/json");
                 System.out.println("GET Request /chaos");
-                RestResponse restResponse = new RestResponse(activeActions,new VotingAction(action1,vote1),new VotingAction(action2,vote2),new VotingAction(action3,vote3),vote4,timeBosBar,isActivated,voteTime);
+                RestResponse restResponse = new RestResponse(activeActions,new VotingAction(action1,vote1),new VotingAction(action2,vote2),new VotingAction(action3,vote3),vote4,timeBosBar,isActivated,voteTime,!useOneTwoThree);
                 //System.out.println(restResponse);
                 String json = new Gson().toJson(restResponse);
                 //System.out.println(json);

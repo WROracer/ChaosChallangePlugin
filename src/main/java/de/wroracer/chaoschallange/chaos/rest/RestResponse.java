@@ -14,8 +14,9 @@ public class RestResponse {
     private int timer;
     private int maxTime;
     private boolean isChaos;
+    private boolean useSix;
 
-    public RestResponse(List<Action> currentActions, VotingAction action1, VotingAction action2, VotingAction action3, int action4, int timer,boolean isChaos,int maxTime) {
+    public RestResponse(List<Action> currentActions, VotingAction action1, VotingAction action2, VotingAction action3, int action4, int timer,boolean isChaos,int maxTime,boolean useSix) {
         this.currentActions = currentActions;
         this.action1 = action1;
         this.action2 = action2;
@@ -24,6 +25,7 @@ public class RestResponse {
         this.timer = timer;
         this.isChaos = isChaos;
         this.maxTime = maxTime;
+        this.useSix = useSix;
     }
 
     public List<Action> getCurrentActions() {
@@ -88,5 +90,13 @@ public class RestResponse {
 
     public void setMaxTime(int maxTime) {
         this.maxTime = maxTime;
+    }
+
+    public boolean isUseSix() {
+        return useSix;
+    }
+
+    public void setUseSix(boolean useSix) {
+        this.useSix = useSix;
     }
 }
