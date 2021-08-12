@@ -19,6 +19,7 @@ import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import spark.Filter;
+import spark.Spark;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -222,6 +223,7 @@ public class ChaosManager implements Listener {
     }
 
     public void stop() {
+        Spark.stop();
         bossBar.removeAll();
         twitchVoteCounter.disconect();
     }
