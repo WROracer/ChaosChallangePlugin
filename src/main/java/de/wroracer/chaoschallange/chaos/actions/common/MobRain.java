@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MobRegen extends ActionListener {
-    public MobRegen( ChaosManager manager) {
-        super("Mob Regen", manager);
+public class MobRain extends ActionListener {
+    public MobRain(ChaosManager manager) {
+        super("Mob rain", manager);
     }
 
     private transient int schedulerID = 0;
