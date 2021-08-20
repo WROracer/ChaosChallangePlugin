@@ -26,7 +26,7 @@ public class MobRain extends ActionListener {
         super.start();
         List<EntityType> entitys = new ArrayList<>();
         for (EntityType type : EntityType.values()) {
-            if (type.isAlive() && type != EntityType.ENDER_DRAGON){
+            if (type.isAlive() && type != EntityType.ENDER_DRAGON && type != EntityType.WITHER){
                 entitys.add(type);
             }
         }

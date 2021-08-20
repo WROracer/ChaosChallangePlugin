@@ -15,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import spark.Filter;
@@ -79,21 +78,21 @@ public class ChaosManager implements Listener {
 
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         board = scoreboard.registerNewObjective("board", "dummy", "§6Vote-Board");
-        board.setDisplaySlot(DisplaySlot.SIDEBAR);
+        //board.setDisplaySlot(DisplaySlot.SIDEBAR);
         board.getScore("Waiting").setScore(1);
 
         bossBar = Bukkit.createBossBar("Voting Time", BarColor.RED, BarStyle.SEGMENTED_20);
         bossBar.setTitle("Voting Time");
         bossBar.setColor(BarColor.RED);
         bossBar.setStyle(BarStyle.SEGMENTED_20);
-        bossBar.setVisible(true);
+        //bossBar.setVisible(true);
         bossBar.removeAll();
-
+/*
         Bukkit.getOnlinePlayers().forEach(player -> {
             player.setScoreboard(scoreboard);
             bossBar.addPlayer(player);
         });
-
+*/
         voteTime = conf.getVotingTime();
 
         isActivated = false;
@@ -127,7 +126,7 @@ public class ChaosManager implements Listener {
         Player player = event.getPlayer();
         event.setJoinMessage(player.getDisplayName() + " ist der Challange beigetreten");
         player.setScoreboard(scoreboard);
-        bossBar.addPlayer(player);
+       // bossBar.addPlayer(player);
     }
 
     public void addAction(Action action) {
