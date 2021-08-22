@@ -9,7 +9,7 @@ import de.wroracer.chaoschallange.chaos.actions.bad.ZombieAttack;
 import de.wroracer.chaoschallange.chaos.actions.common.*;
 import de.wroracer.chaoschallange.chaos.actions.common.DropAllItems;
 import de.wroracer.chaoschallange.chaos.actions.common.LagSimulator;
-import de.wroracer.chaoschallange.chaos.actions.common.MobRegen;
+import de.wroracer.chaoschallange.chaos.actions.common.MobRain;
 import de.wroracer.chaoschallange.chaos.actions.common.PumpkinView;
 import de.wroracer.chaoschallange.chaos.actions.common.RandomEnchantment;
 import de.wroracer.chaoschallange.chaos.actions.common.RandomPotionEffect;
@@ -61,6 +61,7 @@ public abstract class Action {
         new TpToCave("Teleport to next cave", manager);
 
         new DealNoDamage("No Damage",manager);
+        new TpToRandomEntity("Teleport to random entity", manager);
 
 
 
@@ -74,7 +75,7 @@ public abstract class Action {
         new StopRain("Stop rain", manager);
 
         new RandomizeItems(manager);
-        new MobRegen(manager);
+        new MobRain(manager);
 
         //Temp Disabled (Bugy)
         //new FakeDeath("Death",manager);

@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class MobRegen extends ActionListener {
-    public MobRegen( ChaosManager manager) {
-        super("Mob Regen", manager);
+public class MobRain extends ActionListener {
+    public MobRain(ChaosManager manager) {
+        super("Mob rain", manager);
     }
 
     private transient int schedulerID = 0;
@@ -26,7 +26,7 @@ public class MobRegen extends ActionListener {
         super.start();
         List<EntityType> entitys = new ArrayList<>();
         for (EntityType type : EntityType.values()) {
-            if (type.isAlive() && type != EntityType.ENDER_DRAGON){
+            if (type.isAlive() && type != EntityType.ENDER_DRAGON && type != EntityType.WITHER){
                 entitys.add(type);
             }
         }
