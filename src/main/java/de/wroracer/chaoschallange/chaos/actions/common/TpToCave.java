@@ -8,6 +8,9 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class TpToCave extends Action {
     public TpToCave(String name, ChaosManager manager) {
         super(name, manager);
@@ -36,23 +39,45 @@ public class TpToCave extends Action {
 
                 for (int y = 0; !found && !failed; y++) {
                     Block block = getBlockAt(pos, y);
-                    if (block.getType() == Material.CAVE_AIR|| block.getType() == Material.AIR) {
-                        block = getBlockAt(pos, y + 1);
-                        if (block.getType() == Material.CAVE_AIR || block.getType() == Material.AIR) {
 
-                            found = true;
+                    if (p.getLocation().getWorld().getName().endsWith("_nether")) {
+                        if (block.getType() == Material.CAVE_AIR|| block.getType() == Material.AIR) {
+                            block = getBlockAt(pos, y + 1);
+                            if (block.getType() == Material.CAVE_AIR || block.getType() == Material.AIR) {
 
-                            block = getBlockAt(pos, y - 1);
-                            if (block.getType() == Material.LAVA) {
-                                block.setType(Material.GLASS);
+                                found = true;
+
+                                block = getBlockAt(pos, y - 1);
+                                if (block.getType() == Material.LAVA) {
+                                    block.setType(Material.GLASS);
+                                }
+                                pos.setY(y);
+                                pos.setX(pos.getBlockX() +0.5);
+                                pos.setZ(pos.getBlockZ()+0.5);
+
+                                p.teleport(pos);
                             }
-                            pos.setY(y);
-                            pos.setX(pos.getBlockX() +0.5);
-                            pos.setZ(pos.getBlockZ()+0.5);
+                        }
+                    }else {
+                        if (block.getType() == Material.CAVE_AIR) {
+                            block = getBlockAt(pos, y + 1);
+                            if (block.getType() == Material.CAVE_AIR) {
 
-                            p.teleport(pos);
+                                found = true;
+
+                                block = getBlockAt(pos, y - 1);
+                                if (block.getType() == Material.LAVA) {
+                                    block.setType(Material.GLASS);
+                                }
+                                pos.setY(y);
+                                pos.setX(pos.getBlockX() +0.5);
+                                pos.setZ(pos.getBlockZ()+0.5);
+
+                                p.teleport(pos);
+                            }
                         }
                     }
+
                     if (y == 255) failed = true;
                 }
                 z++;

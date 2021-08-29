@@ -64,6 +64,7 @@ public abstract class Action {
         new DealNoDamage("No Damage",manager);
         new TpToRandomEntity("Teleport to random entity", manager);
 
+        new PlayRandomSound(manager);
 
 
 
