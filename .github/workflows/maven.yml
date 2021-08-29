@@ -31,3 +31,9 @@ jobs:
       with:
         name: Package
         path: staging
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v2
+      with:
+        name: plugin Jar
+        path: target/ChaosChallange-1.0-SNAPSHOT.jar
+        retention-days: 5
