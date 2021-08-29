@@ -22,6 +22,9 @@ import de.wroracer.chaoschallange.chaos.actions.good.MakeDay;
 import de.wroracer.chaoschallange.chaos.actions.good.StopRain;
 import de.wroracer.chaoschallange.chaos.actions.good.XpBottles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Action {
 
     private String name;
