@@ -20,6 +20,9 @@ import de.wroracer.chaoschallange.chaos.actions.common.TpToCave;
 import de.wroracer.chaoschallange.chaos.actions.common.WaterBucketMLG;
 import de.wroracer.chaoschallange.chaos.actions.good.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Action {
 
     private String name;

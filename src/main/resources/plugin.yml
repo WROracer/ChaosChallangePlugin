@@ -9,3 +9,7 @@ commands:
     description: Starte das Ganze
   test:
     description: Teste Vershieden Aktionen aus
+  link:
+    description: Link your Twitch account. So your comunity can controll Caos
+  chat:
+    description: Change Your Twitch Chat Settings
