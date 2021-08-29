@@ -18,9 +18,7 @@ import de.wroracer.chaoschallange.chaos.actions.common.ThunderStorm;
 import de.wroracer.chaoschallange.chaos.actions.common.Timelapse;
 import de.wroracer.chaoschallange.chaos.actions.common.TpToCave;
 import de.wroracer.chaoschallange.chaos.actions.common.WaterBucketMLG;
-import de.wroracer.chaoschallange.chaos.actions.good.MakeDay;
-import de.wroracer.chaoschallange.chaos.actions.good.StopRain;
-import de.wroracer.chaoschallange.chaos.actions.good.XpBottles;
+import de.wroracer.chaoschallange.chaos.actions.good.*;
 
 public abstract class Action {
 
@@ -73,6 +71,8 @@ public abstract class Action {
         new MakeDay("Make day", manager);
         new TpToSurface("Tp to surface", manager);
         new StopRain("Stop rain", manager);
+        new GiveRandomStuff("Give random equipment", manager);
+        new GiveRandomItems("Give random items", manager);
 
         new RandomizeItems(manager);
         new MobRain(manager);

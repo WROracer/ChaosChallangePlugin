@@ -36,9 +36,9 @@ public class TpToCave extends Action {
 
                 for (int y = 0; !found && !failed; y++) {
                     Block block = getBlockAt(pos, y);
-                    if (block.getType() == Material.CAVE_AIR) {
+                    if (block.getType() == Material.CAVE_AIR|| block.getType() == Material.AIR) {
                         block = getBlockAt(pos, y + 1);
-                        if (block.getType() == Material.CAVE_AIR) {
+                        if (block.getType() == Material.CAVE_AIR || block.getType() == Material.AIR) {
 
                             found = true;
 
