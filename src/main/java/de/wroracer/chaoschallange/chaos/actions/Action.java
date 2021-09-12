@@ -47,6 +47,7 @@ public abstract class Action {
         new TpToRandomEntity("Teleport to random entity", manager);
         new DelayDamage("Delay damage", manager);
 
+        new PlayRandomSound(manager);
 
 
 

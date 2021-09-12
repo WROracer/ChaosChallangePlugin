@@ -21,8 +21,15 @@ public class TwitchVoteCounter {
     public List<String> hasVoted;
     private final List<String> channels;
 
+    private final List<String> mutedUsers;
+
     public TwitchVoteCounter( ChaosManager manager,MainConfig config) {
         channels = config.getChannel();
+
+        mutedUsers = new ArrayList<>();
+        mutedUsers.add("pretzelrocks");
+        mutedUsers.add("mrballoubot");
+
 
         hasVoted = new ArrayList<>();
         OAuth2Credential credential = new OAuth2Credential("twitch", config.getOAuth2());
@@ -43,9 +50,12 @@ public class TwitchVoteCounter {
                                     hasVoted.add(user);
                                 }
                           }else {
-                              Bukkit.broadcastMessage("§7[§5Twitch-"+channel+"§7] <§f"+user+"§7> §d"+message);
+                              if (!mutedUsers.contains(channel))
+                                  Bukkit.broadcastMessage("§7[§5Twitch-"+channel+"§7] <§f"+user+"§7> §d"+message);
                           }
-                        }catch (Exception ignored){Bukkit.broadcastMessage("§7[§5Twitch-"+channel+"§7] <§f"+user+"§7> §d"+message);}
+                        }catch (Exception ignored){
+                        if (!mutedUsers.contains(channel))
+                        Bukkit.broadcastMessage("§7[§5Twitch-"+channel+"§7] <§f"+user+"§7> §d"+message);}
                 }
             }
         });
