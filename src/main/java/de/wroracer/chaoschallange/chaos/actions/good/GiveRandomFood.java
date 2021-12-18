@@ -4,20 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
 import de.wroracer.chaoschallange.util.ItemBuilder;
 
 public class GiveRandomFood extends Action {
     private static final int minFood = 1;
     private static final int maxFood = 10;
 
-    public GiveRandomFood(String name, ChaosManager manager) {
-        super(name, manager);
+
+    @Override
+    public boolean setup() {
+        return true;
     }
 
     @Override
