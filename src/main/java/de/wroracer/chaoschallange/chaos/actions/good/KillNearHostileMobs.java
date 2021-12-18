@@ -2,6 +2,8 @@ package de.wroracer.chaoschallange.chaos.actions.good;
 
 import java.util.List;
 
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -10,12 +12,14 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
 
+@ActionInfo(name = "Kill near Hostile Mobs")
 public class KillNearHostileMobs extends Action {
 
-    public KillNearHostileMobs(String name, ChaosManager manager) {
-        super(name, manager);
+
+    @Override
+    public boolean setup() {
+        return true;
     }
 
     @Override
