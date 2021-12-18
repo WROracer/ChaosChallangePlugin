@@ -1,17 +1,17 @@
 package de.wroracer.chaoschallange.chaos.actions.common;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.ActionListener;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 
+@ActionInfo(name = "Delay Damage")
 public class DelayDamage extends ActionListener {
-    public DelayDamage(String name, ChaosManager manager) {
-        super(name, manager);
-    }
+
 
     private transient double totalDamage = 0;
     private transient boolean isActive = false;
