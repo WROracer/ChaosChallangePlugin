@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import de.wroracer.chaoschallange.chaos.actions.util.Action;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import de.wroracer.chaoschallange.util.ItemBuilder;
 
+@ActionInfo(name = "Give Random Food")
 public class GiveRandomFood extends Action {
     private static final int minFood = 1;
     private static final int maxFood = 10;
-
 
     @Override
     public boolean setup() {

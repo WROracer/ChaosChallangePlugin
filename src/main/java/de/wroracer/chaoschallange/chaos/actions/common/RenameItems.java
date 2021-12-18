@@ -11,7 +11,9 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import de.wroracer.chaoschallange.chaos.actions.util.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 
+@ActionInfo(name = "Rename Items")
 public class RenameItems extends Action {
 
     @Override
