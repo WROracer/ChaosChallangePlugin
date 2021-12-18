@@ -3,10 +3,10 @@ package de.wroracer.chaoschallange.chaos.actions.util;
 import de.wroracer.chaoschallange.chaos.ChaosManager;
 import de.wroracer.chaoschallange.util.LoggerHelper;
 
-import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 public abstract class Action implements LoggerHelper {
+public abstract class Action {
 
     private String name;
     private transient ChaosManager manager;
@@ -65,6 +65,7 @@ public abstract class Action implements LoggerHelper {
 
         /*new AnimalExplode("Animal Explodes",manager);
         new ZombieAttack("Zombie Attack",manager);
+        new WaterBucketMLG("Water MLG",manager);
         new PumpkinView("Pumpkin View",manager);
         new Timelapse(manager);
         new CreeperArmy(manager);
@@ -74,7 +75,9 @@ public abstract class Action implements LoggerHelper {
         new ThunderStorm("ThunderStorm",manager);
         new TpToCave("Teleport to next cave", manager);
 
+        new DealNoDamage("No Damage",manager);
         new TpToRandomEntity("Teleport to random entity", manager);
+        new DelayDamage("Delay damage", manager);
 
         new PlayRandomSound(manager);
 
