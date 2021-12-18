@@ -6,7 +6,6 @@ import de.wroracer.chaoschallange.util.LoggerHelper;
 import java.util.Objects;
 
 public abstract class Action implements LoggerHelper {
-public abstract class Action {
 
     private String name;
     private transient ChaosManager manager;
