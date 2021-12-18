@@ -1,16 +1,17 @@
-package de.wroracer.chaoschallange.chaos.actions;
+package de.wroracer.chaoschallange.chaos.actions.util;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+@ActionInfo(name = "Test Listender")
 public class TestListender extends ActionListener{
 
     private boolean isActivated;
 
-    public TestListender(String name, ChaosManager manager) {
-        super(name, manager);
+    @Override
+    public boolean setup() {
         isActivated = false;
+        return false;
     }
 
     @Override

@@ -5,9 +5,8 @@
 
 package de.wroracer.chaoschallange.chaos.actions.bad;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
-import de.wroracer.chaoschallange.chaos.actions.TimedAction;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
+import de.wroracer.chaoschallange.chaos.actions.util.TimedAction;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,17 +17,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@ActionInfo(name = "Replace Water",period = 20)
 public class ReplaceAllWater extends TimedAction {
     private final transient List<Block> toReplace = new ArrayList();
 
-    public ReplaceAllWater(String name, ChaosManager manager) {
-        super(name, manager,0L, 20L);
-    }
 
     @Override
     public void stop() {
         super.stop();
         this.toReplace.clear();
+    }
+
+    @Override
+    public boolean setup() {
+        return super.setup();
     }
 
     @Override

@@ -1,17 +1,19 @@
 package de.wroracer.chaoschallange.chaos.actions.common;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
-import de.wroracer.chaoschallange.chaos.actions.TimedAction;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
+import de.wroracer.chaoschallange.chaos.actions.util.TimedAction;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 
+@ActionInfo(name = "Lag",period = 20,delay = 20)
 public class LagSimulator extends TimedAction {
-    public LagSimulator(String name, ChaosManager manager) {
-        super(name, manager,20, 20);
+
+    @Override
+    public boolean setup() {
+        return super.setup();
     }
 
     private transient HashMap<Player, Location[]> locs = new HashMap<>();

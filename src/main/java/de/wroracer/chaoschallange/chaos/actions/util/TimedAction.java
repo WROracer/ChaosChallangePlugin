@@ -1,21 +1,25 @@
-package de.wroracer.chaoschallange.chaos.actions;
+package de.wroracer.chaoschallange.chaos.actions.util;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
 import org.bukkit.Bukkit;
 
 public abstract class TimedAction extends Action {
-    public TimedAction(String name, ChaosManager manager,long delay,long period) {
-        super(name, manager);
-        maxTime = getActionTime();
-        this.period = period;
-        this.delay = delay;
-        time = 0;
-    }
-    private int time;
-    private final int maxTime;
 
-    private final transient long delay;
-    private final transient long period;
+    @Override
+    public boolean setup() {
+        maxTime = getActionTime();
+
+        this.period = getInfo().period();
+        this.delay = getInfo().delay();
+        time = 0;
+        return true;
+
+    }
+
+    private int time;
+    private int maxTime;
+
+    private transient long delay;
+    private transient long period;
 
     private transient int timeSchedulerID;
     private transient int actionSchedulerID;

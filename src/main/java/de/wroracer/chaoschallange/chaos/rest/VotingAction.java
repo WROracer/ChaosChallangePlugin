@@ -1,6 +1,6 @@
 package de.wroracer.chaoschallange.chaos.rest;
 
-import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
 
 public class VotingAction {
     private Action action;

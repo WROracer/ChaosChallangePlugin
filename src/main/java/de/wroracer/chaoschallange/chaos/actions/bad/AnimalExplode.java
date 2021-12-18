@@ -1,17 +1,20 @@
 package de.wroracer.chaoschallange.chaos.actions.bad;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.List;
 
-
+@ActionInfo(name = "Animal Explode")
 public class AnimalExplode extends Action {
-    public AnimalExplode(String name, ChaosManager manager) {
-        super(name, manager);
+
+    @Override
+    public boolean setup() {
+        return true;
     }
 
     @Override

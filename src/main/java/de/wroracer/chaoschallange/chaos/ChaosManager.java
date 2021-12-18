@@ -2,10 +2,12 @@ package de.wroracer.chaoschallange.chaos;
 
 import com.google.gson.Gson;
 import de.wroracer.chaoschallange.ChaosChallange;
-import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import de.wroracer.chaoschallange.chaos.rest.RestResponse;
 import de.wroracer.chaoschallange.chaos.rest.VotingAction;
 import de.wroracer.chaoschallange.config.MainConfig;
+import de.wroracer.chaoschallange.util.LoggerHelper;
 import de.wroracer.chaoschallange.vote.counter.TwitchVoteCounter;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
@@ -17,6 +19,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+import org.reflections.Reflections;
 import spark.Filter;
 import spark.Spark;
 
@@ -26,7 +29,7 @@ import java.util.Random;
 
 import static spark.Spark.*;
 
-public class ChaosManager implements Listener {
+public class ChaosManager implements Listener, LoggerHelper {
 
     private ChaosChallange plugin;
 
@@ -81,6 +84,8 @@ public class ChaosManager implements Listener {
         //board.setDisplaySlot(DisplaySlot.SIDEBAR);
         board.getScore("Waiting").setScore(1);
 
+
+
         bossBar = Bukkit.createBossBar("Voting Time", BarColor.RED, BarStyle.SEGMENTED_20);
         bossBar.setTitle("Voting Time");
         bossBar.setColor(BarColor.RED);
@@ -99,7 +104,30 @@ public class ChaosManager implements Listener {
 
         lastAction = null;
         registerSpark();
+        registerActions(getClass().getPackage().getName());
+    }
 
+    private void registerActions(String packageName){
+        plugin.getLogger().info("Registering Actions");
+        boolean isDebug = plugin.getConfig().isBoolean("debug");
+        for (Class<? extends Action> clazz : new Reflections(packageName+".actions").getSubTypesOf(Action.class)){
+            try {
+                if (clazz.getPackage().getName().contains("util")){
+                    continue;
+                }
+                Action pluginCommand = clazz.newInstance();
+                if (isDebug){
+                    log().info("Registering Action"+clazz.getSimpleName());
+                }
+                pluginCommand.setManager(this);
+                pluginCommand.setup();
+
+                addAction(pluginCommand);
+            } catch (InstantiationException | IllegalAccessException  e) {
+                e.printStackTrace();
+            }
+        }
+        log().info("Registering Commands Finished");
     }
 
     public void registerSpark(){

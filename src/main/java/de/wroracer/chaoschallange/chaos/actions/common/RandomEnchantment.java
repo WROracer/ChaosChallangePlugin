@@ -1,7 +1,7 @@
 package de.wroracer.chaoschallange.chaos.actions.common;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.Inventory;
@@ -13,15 +13,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+@ActionInfo(name = "Random Enchantment")
 public class RandomEnchantment extends Action {
+
+    @Override
+    public boolean setup() {
+        Enchantment[] enchantments = Enchantment.values();
+        Collections.addAll(enchantmentList, enchantments);
+        return true;
+    }
 
     private transient List<Enchantment> enchantmentList = new ArrayList<>();
 
-    public RandomEnchantment(String name, ChaosManager manager) {
-        super(name, manager);
-        Enchantment[] enchantments = Enchantment.values();
-        Collections.addAll(enchantmentList, enchantments);
-    }
 
     @Override
     public void start() {

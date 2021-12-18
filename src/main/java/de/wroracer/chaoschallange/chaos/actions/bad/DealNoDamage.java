@@ -1,14 +1,17 @@
 package de.wroracer.chaoschallange.chaos.actions.bad;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.ActionListener;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionListener;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+@ActionInfo(name = "Deal no Damage")
 public class DealNoDamage extends ActionListener {
-    public DealNoDamage(String name, ChaosManager manager) {
-        super(name, manager);
+
+    @Override
+    public boolean setup() {
+        return true;
     }
 
     @EventHandler

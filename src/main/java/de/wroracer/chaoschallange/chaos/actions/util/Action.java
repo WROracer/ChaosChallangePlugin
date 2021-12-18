@@ -1,37 +1,51 @@
-package de.wroracer.chaoschallange.chaos.actions;
+package de.wroracer.chaoschallange.chaos.actions.util;
 
 import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.bad.*;
-import de.wroracer.chaoschallange.chaos.actions.bad.AnimalExplode;
-import de.wroracer.chaoschallange.chaos.actions.bad.CreeperArmy;
-import de.wroracer.chaoschallange.chaos.actions.bad.ReplaceAllWater;
-import de.wroracer.chaoschallange.chaos.actions.bad.ZombieAttack;
-import de.wroracer.chaoschallange.chaos.actions.common.*;
-import de.wroracer.chaoschallange.chaos.actions.common.DropAllItems;
-import de.wroracer.chaoschallange.chaos.actions.common.LagSimulator;
-import de.wroracer.chaoschallange.chaos.actions.common.MobRain;
-import de.wroracer.chaoschallange.chaos.actions.common.PumpkinView;
-import de.wroracer.chaoschallange.chaos.actions.common.RandomEnchantment;
-import de.wroracer.chaoschallange.chaos.actions.common.RandomPotionEffect;
-import de.wroracer.chaoschallange.chaos.actions.common.RandomizeItems;
-import de.wroracer.chaoschallange.chaos.actions.common.ThunderStorm;
-import de.wroracer.chaoschallange.chaos.actions.common.Timelapse;
-import de.wroracer.chaoschallange.chaos.actions.common.TpToCave;
-import de.wroracer.chaoschallange.chaos.actions.common.WaterBucketMLG;
-import de.wroracer.chaoschallange.chaos.actions.good.*;
+import de.wroracer.chaoschallange.util.LoggerHelper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.annotation.Annotation;
+import java.util.Objects;
 
-public abstract class Action {
+public abstract class Action implements LoggerHelper {
 
     private String name;
     private transient ChaosManager manager;
 
+    private final ActionInfo info;
 
+    public Action(){
+        this.info = getClass().getDeclaredAnnotation(ActionInfo.class);
+        if (info == null){
+            log().warning("Anotation in Classe: "+getClass().getName()+" nicht vorhanden.");
+            name = "NaN";
+        }else {
+            log().info("Registering Action: "+getClass().getSimpleName());
+            name = info.name();
+        }
+    }
+
+    public ActionInfo getInfo() {
+        return info;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setManager(ChaosManager manage){
+        this.manager = manage;
+    }
+
+    public abstract boolean setup();
+
+
+    @Deprecated
     public Action(String name, ChaosManager manager){
         this.name = name;
         this.manager = manager;
+        this.info = getClass().getDeclaredAnnotation(ActionInfo.class);
+        Objects.requireNonNull(info,"Actions must have ActionInfo anotation");
+        this.name = info.name();
         manager.addAction(this);
     }
 
@@ -49,9 +63,8 @@ public abstract class Action {
 
     public static void registerActions(ChaosManager manager){
 
-        new AnimalExplode("Animal Explodes",manager);
+        /*new AnimalExplode("Animal Explodes",manager);
         new ZombieAttack("Zombie Attack",manager);
-        new WaterBucketMLG("Water MLG",manager);
         new PumpkinView("Pumpkin View",manager);
         new Timelapse(manager);
         new CreeperArmy(manager);
@@ -61,10 +74,12 @@ public abstract class Action {
         new ThunderStorm("ThunderStorm",manager);
         new TpToCave("Teleport to next cave", manager);
 
-        new DealNoDamage("No Damage",manager);
         new TpToRandomEntity("Teleport to random entity", manager);
 
         new PlayRandomSound(manager);
+
+        new GamemodeSwitch(manager);
+
 
 
 
@@ -79,7 +94,7 @@ public abstract class Action {
         new GiveRandomItems("Give random items", manager);
 
         new RandomizeItems(manager);
-        new MobRain(manager);
+*/
 
         //Temp Disabled (Bugy)
         //new FakeDeath("Death",manager);

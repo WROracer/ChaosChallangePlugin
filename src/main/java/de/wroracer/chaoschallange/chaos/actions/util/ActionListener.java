@@ -1,21 +1,22 @@
-package de.wroracer.chaoschallange.chaos.actions;
+package de.wroracer.chaoschallange.chaos.actions.util;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 
 public abstract class ActionListener extends Action implements Listener {
-    public ActionListener(String name, ChaosManager manager) {
-        super(name, manager);
-        Bukkit.getPluginManager().registerEvents(this,manager.getPlugin());
+
+    @Override
+    public boolean setup() {
+        Bukkit.getPluginManager().registerEvents(this,getManager().getPlugin());
         maxTime = getActionTime();
         time = 0;
+        return true;
     }
 
     public transient boolean isActive = false;
     private transient int schedulerID;
     private int time;
-    private final int maxTime;
+    private int maxTime;
 
     @Override
     public void start() {

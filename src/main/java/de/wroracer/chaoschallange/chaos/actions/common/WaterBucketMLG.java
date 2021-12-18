@@ -1,7 +1,7 @@
 package de.wroracer.chaoschallange.chaos.actions.common;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.ActionListener;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionListener;
 import de.wroracer.chaoschallange.util.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -15,9 +15,12 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
+@ActionInfo(name = "MLG")
 public class WaterBucketMLG extends ActionListener {
-    public WaterBucketMLG(String name, ChaosManager manager) {
-        super(name, manager);
+
+    @Override
+    public boolean setup() {
+        return true;
     }
 
     private transient HashMap<Player, Location> positions = new HashMap<>();

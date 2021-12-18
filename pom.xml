@@ -108,6 +108,12 @@
             <version>2.9.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.12</version>
+        </dependency>
+
         <!--YT-Integration-->
        <!-- <dependency>
             <groupId>com.google.apis</groupId>

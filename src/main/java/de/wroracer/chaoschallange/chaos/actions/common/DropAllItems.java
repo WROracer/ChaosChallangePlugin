@@ -5,17 +5,20 @@
 
 package de.wroracer.chaoschallange.chaos.actions.common;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Iterator;
 
+@ActionInfo(name = "Drop All Items")
 public class DropAllItems extends Action {
-    public DropAllItems(String name, ChaosManager manager) {
-        super(name, manager);
+
+    @Override
+    public boolean setup() {
+        return true;
     }
 
     public void start() {

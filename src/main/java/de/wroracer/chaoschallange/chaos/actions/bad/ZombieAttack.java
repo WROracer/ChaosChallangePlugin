@@ -1,7 +1,7 @@
 package de.wroracer.chaoschallange.chaos.actions.bad;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,9 +9,12 @@ import org.bukkit.entity.EntityType;
 
 import java.util.Random;
 
+@ActionInfo(name = "Zombie Attack")
 public class ZombieAttack extends Action {
-    public ZombieAttack(String name, ChaosManager manager) {
-        super(name, manager);
+
+    @Override
+    public boolean setup() {
+        return true;
     }
 
     @Override

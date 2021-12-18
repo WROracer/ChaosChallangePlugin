@@ -1,11 +1,13 @@
-package de.wroracer.chaoschallange.chaos.actions;
+package de.wroracer.chaoschallange.chaos.actions.util;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
 import org.bukkit.event.Listener;
 
+@ActionInfo(name = "Test")
 public class Test extends Action implements Listener {
-    public Test(String name, ChaosManager manager) {
-        super(name, manager);
+
+    @Override
+    public boolean setup() {
+        return false;
     }
 
     @Override

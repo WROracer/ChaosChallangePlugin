@@ -1,8 +1,7 @@
 package de.wroracer.chaoschallange.chaos.rest;
 
-import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class RestResponse {

@@ -1,13 +1,16 @@
 package de.wroracer.chaoschallange.chaos.actions.good;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
+@ActionInfo(name = "Make Day")
 public class MakeDay extends Action {
-    public MakeDay(String name, ChaosManager manager) {
-        super(name, manager);
+
+    @Override
+    public boolean setup() {
+        return true;
     }
 
     @Override

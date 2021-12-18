@@ -1,7 +1,7 @@
 package de.wroracer.chaoschallange.chaos.actions.good;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.Action;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import de.wroracer.chaoschallange.util.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -11,9 +11,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+@ActionInfo(name = "Random Items")
 public class GiveRandomItems extends Action {
-    public GiveRandomItems(String name, ChaosManager manager) {
-        super(name, manager);
+
+    @Override
+    public boolean setup() {
+        return true;
     }
 
     @Override

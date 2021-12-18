@@ -1,17 +1,19 @@
 package de.wroracer.chaoschallange.chaos.actions.common;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
-import de.wroracer.chaoschallange.chaos.actions.Action;
-import de.wroracer.chaoschallange.chaos.actions.TimedAction;
+import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
+import de.wroracer.chaoschallange.chaos.actions.util.TimedAction;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import java.util.Objects;
 import java.util.Random;
 
+@ActionInfo(name = "Thunder Storm",delay = 20,period = 20)
 public class ThunderStorm extends TimedAction {
-    public ThunderStorm(String name, ChaosManager manager) {
-        super(name, manager,20, 20);
+
+    @Override
+    public boolean setup() {
+        return super.setup();
     }
 
     private transient Random random = new Random();
