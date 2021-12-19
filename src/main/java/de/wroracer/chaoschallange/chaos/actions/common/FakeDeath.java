@@ -21,11 +21,6 @@ public class FakeDeath extends ActionListener {
     private transient HashMap<Player, Location> positions = new HashMap<>();
 
     @Override
-    public boolean setup() {
-        return true;
-    }
-
-    @Override
     public void start() {
         // positions.clear();
         Bukkit.getOnlinePlayers().forEach(player -> {
@@ -62,15 +57,15 @@ public class FakeDeath extends ActionListener {
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) { // WHY DOES THIS NOT TRIGGER???????
         // Player player = event.getPlayer();
-        System.out.println("baum");
-        System.out.println("Player " + event.getPlayer().getName() + " respawned");
-        positions.forEach((player, location) -> {
-            if (event.getPlayer().equals(player)) {
-                event.setRespawnLocation(location);
-                // player.teleport(location);
-                positions.remove(player);
-            }
-        });
+        // System.out.println("baum");
+        // System.out.println("Player " + event.getPlayer().getName() + " respawned");
+
+        if (positions.keySet().stream().anyMatch(p -> event.getPlayer().getUniqueId().equals(p.getUniqueId()))) {
+            Player player = event.getPlayer();
+            event.setRespawnLocation(positions.get(player));
+            // player.teleport(location);
+            positions.remove(player);
+        }
 
     }
 }

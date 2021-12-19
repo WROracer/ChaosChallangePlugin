@@ -46,7 +46,6 @@ public class ChaosManager implements Listener, LoggerHelper {
 
     private final String randomName = "Random event";
 
-
     private Action action1;
     private Action action2;
     private Action action3;
@@ -81,23 +80,21 @@ public class ChaosManager implements Listener, LoggerHelper {
 
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         board = scoreboard.registerNewObjective("board", "dummy", "§6Vote-Board");
-        //board.setDisplaySlot(DisplaySlot.SIDEBAR);
+        // board.setDisplaySlot(DisplaySlot.SIDEBAR);
         board.getScore("Waiting").setScore(1);
-
-
 
         bossBar = Bukkit.createBossBar("Voting Time", BarColor.RED, BarStyle.SEGMENTED_20);
         bossBar.setTitle("Voting Time");
         bossBar.setColor(BarColor.RED);
         bossBar.setStyle(BarStyle.SEGMENTED_20);
-        //bossBar.setVisible(true);
+        // bossBar.setVisible(true);
         bossBar.removeAll();
-/*
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            player.setScoreboard(scoreboard);
-            bossBar.addPlayer(player);
-        });
-*/
+        /*
+         * Bukkit.getOnlinePlayers().forEach(player -> {
+         * player.setScoreboard(scoreboard);
+         * bossBar.addPlayer(player);
+         * });
+         */
         voteTime = conf.getVotingTime();
 
         isActivated = false;
@@ -107,47 +104,49 @@ public class ChaosManager implements Listener, LoggerHelper {
         registerActions(getClass().getPackage().getName());
     }
 
-    private void registerActions(String packageName){
+    private void registerActions(String packageName) {
         plugin.getLogger().info("Registering Actions");
         boolean isDebug = plugin.getConfig().isBoolean("debug");
-        for (Class<? extends Action> clazz : new Reflections(packageName+".actions").getSubTypesOf(Action.class)){
+        for (Class<? extends Action> clazz : new Reflections(packageName + ".actions").getSubTypesOf(Action.class)) {
             try {
-                if (clazz.getPackage().getName().contains("util")){
+                if (clazz.getPackage().getName().contains("util")) {
                     continue;
                 }
                 Action pluginCommand = clazz.newInstance();
-                if (isDebug){
-                    log().info("Registering Action"+clazz.getSimpleName());
+                if (isDebug) {
+                    log().info("Registering Action" + clazz.getSimpleName());
                 }
                 pluginCommand.setManager(this);
                 pluginCommand.setup();
 
                 addAction(pluginCommand);
-            } catch (InstantiationException | IllegalAccessException  e) {
+            } catch (InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
         log().info("Registering Commands Finished");
     }
 
-    public void registerSpark(){
+    public void registerSpark() {
         port(conf.getRestPort());
 
         after((Filter) (request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
             response.header("Access-Control-Allow-Methods", "GET");
         });
-        
-        get("/",(request, response) -> "{\"Status\":\"Online\"}");
 
-        get("/chaos",(request, response) ->{
-                response.type("application/json");
-                //System.out.println("GET Request /chaos");
-                RestResponse restResponse = new RestResponse(activeActions,new VotingAction(action1,vote1),new VotingAction(action2,vote2),new VotingAction(action3,vote3),vote4,timeBosBar,isActivated,voteTime,!useOneTwoThree);
-                //System.out.println(restResponse);
-                String json = new Gson().toJson(restResponse);
-                //System.out.println(json);
-                return json;
+        get("/", (request, response) -> "{\"Status\":\"Online\"}");
+
+        get("/chaos", (request, response) -> {
+            response.type("application/json");
+            // System.out.println("GET Request /chaos");
+            RestResponse restResponse = new RestResponse(activeActions, new VotingAction(action1, vote1),
+                    new VotingAction(action2, vote2), new VotingAction(action3, vote3), vote4, timeBosBar, isActivated,
+                    voteTime, !useOneTwoThree);
+            // System.out.println(restResponse);
+            String json = new Gson().toJson(restResponse);
+            // System.out.println(json);
+            return json;
         });
     }
 
@@ -156,7 +155,7 @@ public class ChaosManager implements Listener, LoggerHelper {
         Player player = event.getPlayer();
         event.setJoinMessage(player.getDisplayName() + " ist der Challange beigetreten");
         player.setScoreboard(scoreboard);
-       // bossBar.addPlayer(player);
+        // bossBar.addPlayer(player);
     }
 
     public void addAction(Action action) {
@@ -177,7 +176,7 @@ public class ChaosManager implements Listener, LoggerHelper {
 
     private void deac() {
         try {
-            scoreboard.getEntries().forEach(entry->{
+            scoreboard.getEntries().forEach(entry -> {
                 scoreboard.resetScores(entry);
             });
         } catch (Exception ignored) {
@@ -185,7 +184,6 @@ public class ChaosManager implements Listener, LoggerHelper {
         }
         board.getScore("Waiting").setScore(1);
     }
-
 
     private int timeBosBar = 0;
 
@@ -195,7 +193,6 @@ public class ChaosManager implements Listener, LoggerHelper {
         timeBosBar--;
     }
 
-
     private boolean useOneTwoThree;
 
     public int getVoteTime() {
@@ -204,13 +201,12 @@ public class ChaosManager implements Listener, LoggerHelper {
 
     private void startVoting() {
         try {
-            scoreboard.getEntries().forEach(entry->{
+            scoreboard.getEntries().forEach(entry -> {
                 scoreboard.resetScores(entry);
             });
         } catch (Exception ignored) {
 
         }
-
 
         vote1 = 0;
         vote2 = 0;
@@ -236,8 +232,8 @@ public class ChaosManager implements Listener, LoggerHelper {
             board.getScore(action3.getName()).setScore(8);
             board.getScore(randomName).setScore(9);
         }
-        if (lastAction!=null)
-            board.getScore("Current: "+lastAction.getName()).setScore(-1);
+        if (lastAction != null)
+            board.getScore("Current: " + lastAction.getName()).setScore(-1);
         twitchVoteCounter.hasVoted.clear();
         if (isActivated) {
             timeBosBar = voteTime;
@@ -283,9 +279,11 @@ public class ChaosManager implements Listener, LoggerHelper {
     }
 
     private void endVoting() {
-        /*if (lastAction != null){
-            lastAction.stop();
-        }*/
+        /*
+         * if (lastAction != null){
+         * lastAction.stop();
+         * }
+         */
         Random rnd = new Random();
         Action action4 = actions.get(rnd.nextInt(actions.size()));
         List<Action> toSelect = new ArrayList<>();
@@ -302,7 +300,7 @@ public class ChaosManager implements Listener, LoggerHelper {
         for (int i = vote4; i != 0; i--) {
             toSelect.add(action4);
         }
-        if (toSelect.size() == 0){
+        if (toSelect.size() == 0) {
             toSelect.add(action1);
             toSelect.add(action2);
             toSelect.add(action3);
@@ -318,7 +316,7 @@ public class ChaosManager implements Listener, LoggerHelper {
         if (isActivated) {
             lastAction.start();
             activeActions.add(toActivate);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, ()->{
+            Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> {
                 toActivate.stop();
                 activeActions.remove(toActivate);
             }, toActivate.getActionTime() * 20);
