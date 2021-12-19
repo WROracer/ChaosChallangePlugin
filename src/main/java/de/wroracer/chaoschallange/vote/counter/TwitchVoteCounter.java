@@ -4,7 +4,6 @@ import com.github.philippheuer.credentialmanager.domain.OAuth2Credential;
 import com.github.twitch4j.TwitchClient;
 import com.github.twitch4j.TwitchClientBuilder;
 import com.github.twitch4j.chat.events.channel.ChannelMessageEvent;
-import de.wroracer.chaoschallange.chaos.ChaosManager;
 import de.wroracer.chaoschallange.config.MainConfig;
 import org.bukkit.Bukkit;
 
@@ -12,18 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-//import javax.xml.bind.Marshaller;
 
-public class TwitchVoteCounter {
+public class TwitchVoteCounter extends VoteCounter{
 
-    private final TwitchClient client;
+    private TwitchClient client;
 
-    public List<String> hasVoted;
-    private final List<String> channels;
+    private List<String> channels;
+    private List<String> mutedUsers;
 
-    private final List<String> mutedUsers;
 
-    public TwitchVoteCounter( ChaosManager manager,MainConfig config) {
+
+    @Override
+    public boolean onEnable() {
+        MainConfig config = new MainConfig();
         channels = config.getChannel();
 
         mutedUsers = new ArrayList<>();
@@ -31,10 +31,9 @@ public class TwitchVoteCounter {
         mutedUsers.add("mrballoubot");
 
 
-        hasVoted = new ArrayList<>();
         OAuth2Credential credential = new OAuth2Credential("twitch", config.getOAuth2());
         client = TwitchClientBuilder.builder()
-            .withEnableChat(true).withChatAccount(credential).build();
+                .withEnableChat(true).withChatAccount(credential).build();
         client.getEventManager().onEvent(ChannelMessageEvent.class, new Consumer<ChannelMessageEvent>() {
             @Override
             public void accept(ChannelMessageEvent event) {
@@ -44,18 +43,15 @@ public class TwitchVoteCounter {
                 if (channels.contains(channel)){
                     try {
                         int nbr = Integer.parseInt(message);
-                          if (nbr >=1 && nbr!=5 && nbr <=9){
-                                if (!hasVoted.contains(user)) {
-                                    manager.vote(nbr);
-                                    hasVoted.add(user);
-                                }
-                          }else {
-                              if (!mutedUsers.contains(channel))
-                                  Bukkit.broadcastMessage("§7[§5Twitch-"+channel+"§7] <§f"+user+"§7> §d"+message);
-                          }
-                        }catch (Exception ignored){
-                        if (!mutedUsers.contains(channel))
-                        Bukkit.broadcastMessage("§7[§5Twitch-"+channel+"§7] <§f"+user+"§7> §d"+message);}
+                        if (nbr >=1 && nbr!=5 && nbr <=9){
+                            registerVote(nbr,user);
+                        }else {
+                            if (!mutedUsers.contains(user))
+                                Bukkit.broadcastMessage("§7[§5Twitch-"+channel+"§7] <§f"+user+"§7> §d"+message);
+                        }
+                    }catch (Exception ignored){
+                        if (!mutedUsers.contains(user))
+                            Bukkit.broadcastMessage("§7[§5Twitch-"+channel+"§7] <§f"+user+"§7> §d"+message);}
                 }
             }
         });
@@ -65,16 +61,17 @@ public class TwitchVoteCounter {
             client.getChat().sendMessage(channel,"Chaos Online");
             client.getChat().joinChannel(channel);
         });
+        return true;
     }
-    public void disconect(){
+
+    @Override
+    public boolean onDisable() {
         try {
             channels.forEach(channel->{
                 client.getChat().leaveChannel(channel);
             });
             client.getChat().disconnect();
         }catch (Exception ignored){}
-
+        return true;
     }
-
-
 }

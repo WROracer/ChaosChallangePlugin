@@ -1,6 +1,6 @@
 package de.wroracer.chaoschallange.chaos.actions.util;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.chaos.ActionManager;
 import de.wroracer.chaoschallange.util.LoggerHelper;
 
 import java.util.Objects;
@@ -8,7 +8,7 @@ import java.util.Objects;
 public abstract class Action implements LoggerHelper {
 
     private String name;
-    private transient ChaosManager manager;
+    private transient ActionManager manager;
 
     private transient final ActionInfo info;
 
@@ -31,27 +31,17 @@ public abstract class Action implements LoggerHelper {
         this.name = name;
     }
 
-    public void setManager(ChaosManager manage) {
+    public void setManager(ActionManager manage) {
         this.manager = manage;
     }
 
     public abstract boolean setup();
 
-    @Deprecated
-    public Action(String name, ChaosManager manager) {
-        this.name = name;
-        this.manager = manager;
-        this.info = getClass().getDeclaredAnnotation(ActionInfo.class);
-        Objects.requireNonNull(info, "Actions must have ActionInfo anotation");
-        this.name = info.name();
-        manager.addAction(this);
-    }
-
     public String getName() {
         return name;
     }
 
-    public ChaosManager getManager() {
+    public ActionManager getManager() {
         return manager;
     }
 
@@ -63,9 +53,9 @@ public abstract class Action implements LoggerHelper {
 
     public abstract void stop();
 
-    public static void registerActions(ChaosManager manager) {
+   /* public static void registerActions(ChaosManager manager) {
 
-        /*
+        *//*
          * new AnimalExplode("Animal Explodes",manager);
          * new ZombieAttack("Zombie Attack",manager);
          * new WaterBucketMLG("Water MLG",manager);
@@ -100,13 +90,13 @@ public abstract class Action implements LoggerHelper {
          * new GiveRandomItems("Give random items", manager);
          * 
          * new RandomizeItems(manager);
-         */
+         *//*
 
         // Temp Disabled (Bugy)
         // new FakeDeath("Death",manager);
 
         // new Test("TEST",manager);
         // new TestListender("TEST",manager);
-    }
+    }*/
 
 }

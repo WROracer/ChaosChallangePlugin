@@ -1,6 +1,6 @@
 package de.wroracer.chaoschallange.commands;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.chaos.ActionManager;
 import de.wroracer.chaoschallange.chaos.actions.util.Action;
 import de.wroracer.chaoschallange.config.MainConfig;
 import org.bukkit.Bukkit;
@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestActionCommand implements CommandExecutor, TabCompleter {
-    private ChaosManager chaosManager;
+    private ActionManager chaosManager;
     private List<Action> actions;
     private final MainConfig config;
 
-    public TestActionCommand(ChaosManager chaosManager) {
+    public TestActionCommand(ActionManager chaosManager) {
         this.chaosManager = chaosManager;
         actions = chaosManager.getActions();
         this.config = new MainConfig();
@@ -32,16 +32,10 @@ public class TestActionCommand implements CommandExecutor, TabCompleter {
             cmd+=" "+a;
         }
         String finalCmd = cmd;
-        commandSender.sendMessage(cmd.replaceFirst(" ", ""));
         actions.forEach(action -> {
-            if (action.getName().equals(finalCmd.replaceFirst(" ", ""))){
-                action.start();
-                Bukkit.getScheduler().scheduleSyncDelayedTask(chaosManager.getPlugin(), new Runnable() {
-                    @Override
-                    public void run() {
-                        action.stop();
-                    }
-                }, 20*action.getActionTime());
+            if (action.getName().toLowerCase().equals(finalCmd.toLowerCase().replaceFirst(" ", ""))){
+                Bukkit.getServer().broadcastMessage("§4Testing Action: §2"+action.getName());
+                chaosManager.testAction(action);
             }
         });
         return false;
@@ -52,7 +46,7 @@ public class TestActionCommand implements CommandExecutor, TabCompleter {
         List<String> back = new ArrayList<>();
         if (strings.length >= 1) {
             actions.forEach(action -> {
-                if (action.getName().startsWith(strings[0])) {
+                if (action.getName().toLowerCase().startsWith(strings[0].toLowerCase())) {
                     back.add(action.getName());
                 }
             });

@@ -1,6 +1,6 @@
 package de.wroracer.chaoschallange;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.chaos.ActionManager;
 import de.wroracer.chaoschallange.commands.StartCommand;
 import de.wroracer.chaoschallange.commands.TestActionCommand;
 import de.wroracer.chaoschallange.commands.VoteCommand;
@@ -17,13 +17,13 @@ public final class ChaosChallange extends JavaPlugin {
 
     public Settings settings;
 
-    private ChaosManager manager;
+    private ActionManager manager;
     @Override
     public void onEnable() {
         INSTANCE = this;
         // Plugin startup logic
         settings = Settings.getSettings();
-        manager = new ChaosManager(this);
+        manager = new ActionManager(this);
         //Action.registerActions(manager);
         initCommands();
         System.out.println(prefix+"Commands Initzialisiert");
@@ -36,7 +36,8 @@ public final class ChaosChallange extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        manager.stop();// Plugin shutdown logic
+        manager.onDisable();
+        manager.stopChaos();// Plugin shutdown logic
         settings.save();
     }
 

@@ -1,6 +1,5 @@
 package de.wroracer.chaoschallange.chaos.actions.common;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
 import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import de.wroracer.chaoschallange.chaos.actions.util.ActionListener;
 import org.bukkit.Bukkit;

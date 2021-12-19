@@ -12,4 +12,5 @@ public @interface ActionInfo {
     String description() default "";
     long delay() default 0;
     long period() default 0;
+    boolean isFullTime() default false;
 }

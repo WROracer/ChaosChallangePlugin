@@ -11,7 +11,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
 
 @ActionInfo(name = "Kill near Hostile Mobs")
 public class KillNearHostileMobs extends Action {

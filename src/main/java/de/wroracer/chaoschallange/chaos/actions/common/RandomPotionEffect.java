@@ -1,22 +1,24 @@
 package de.wroracer.chaoschallange.chaos.actions.common;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
 import de.wroracer.chaoschallange.chaos.actions.util.Action;
 import de.wroracer.chaoschallange.chaos.actions.util.ActionInfo;
 import org.bukkit.Bukkit;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
 @ActionInfo(name = "Random Potion Effect")
 public class RandomPotionEffect extends Action {
-    private transient List<PotionEffectType> potionEffects = new ArrayList<>();
-    private transient ChaosManager chaosManager;
+    private transient List<PotionEffectType> potionEffects;
 
     @Override
     public boolean setup() {
+        potionEffects = new ArrayList<>();
+        PotionEffectType[] potionEffected = PotionEffectType.values();
+        Collections.addAll(potionEffects, potionEffected);
         return true;
     }
 
@@ -24,7 +26,7 @@ public class RandomPotionEffect extends Action {
     public void start() {
         Random random = new Random();
         Bukkit.getOnlinePlayers().forEach(player -> {
-            player.addPotionEffect(potionEffects.get(random.nextInt(potionEffects.size())).createEffect(chaosManager.getVoteTime()*20,random.nextInt(10)));
+            player.addPotionEffect(potionEffects.get(Math.abs(random.nextInt(potionEffects.size()))).createEffect(getManager().getVoteTime()*20,Math.abs(random.nextInt(10))));
         });
     }
 

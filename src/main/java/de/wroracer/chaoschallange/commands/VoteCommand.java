@@ -1,14 +1,14 @@
 package de.wroracer.chaoschallange.commands;
 
-import de.wroracer.chaoschallange.chaos.ChaosManager;
+import de.wroracer.chaoschallange.chaos.ActionManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class VoteCommand implements CommandExecutor {
-    private ChaosManager manager;
+    private ActionManager manager;
 
-    public VoteCommand(ChaosManager manager) {
+    public VoteCommand(ActionManager manager) {
         this.manager = manager;
     }
 
@@ -16,7 +16,7 @@ public class VoteCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 1){
             int vote = Integer.parseInt(args[0]);
-            manager.vote(vote);
+            manager.registerVote(vote,sender.getName());
         }
         return false;
     }
